@@ -1,0 +1,7 @@
+---
+
+knownEmployments:
+  - amount: 75335.44
+    benefits:
+      - amount: 122.55
+      - amount: 120.00

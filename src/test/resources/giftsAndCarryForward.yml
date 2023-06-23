@@ -1,0 +1,16 @@
+---
+
+knownEmployments:
+  - amount: 178948.75
+    benefits:
+      - amount: 122.70
+
+knownPensions:
+  - amount: 41000.00
+    grossedUp: no
+    type: SIPP
+
+gifts:
+  - amount: 120.00
+
+pensionAllowanceCarryForward: 51300

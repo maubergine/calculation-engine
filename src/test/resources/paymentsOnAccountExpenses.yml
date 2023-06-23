@@ -1,0 +1,15 @@
+---
+
+knownEmployments:
+  - amount: 32254.45
+    expenses:
+      - amount: 179.40
+
+dividends:
+  - amount: 25123.25
+
+untaxedInterest: 620.00
+
+paymentsMade: 1230.55
+
+taxPaidOverride: 4682.2

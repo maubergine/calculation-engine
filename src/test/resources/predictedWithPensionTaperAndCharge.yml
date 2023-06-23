@@ -1,0 +1,15 @@
+---
+
+predictedEmployments:
+  - base: 230000
+    holidayDays: 5
+    predictedBonus: 0.2
+    payrollGiving: 4000
+    salarySacrifice: 0.1
+    benefits:
+      - amount: 700.00
+
+predictedPensions:
+  - income: 230000
+    percentage: 0.1
+

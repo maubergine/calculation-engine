@@ -1,0 +1,270 @@
+/Users/maubergine/dev/repos/personal/calculation-engine/src/main/resources/scenarios/fy2223_cr.yml
+
+Pay from all employments:              40295.00
+plus benefits and expenses received:   0.00
+minus allowable expenses:              0.00
+Total from all employments:            40295.00
+Dividends from foreign companies:      82120.00
+Interest from UK banks etc.:           493.00
+Total income received:                 122908.00
+minus Personal Allowance:              7505.24
+
+Total income on which tax is due: 115402.76
+
+Your basic rate limit has been increased by 12778.48 and 0.00 to 50478.48 for pension payments and
+Gift Aid payments.
+
+Pay, pensions, profit etc.
+                 Amount       Percentage       Total
+Basic rate:      32789.76           20%          6557.95
+Higher rate:     0.00           0%          0.00
+Additional rate: 0.00           0%          0.00
+
+Savings interest from banks or building societies, securities, etc.
+Basic rate band at nil rate: 493.00    0.00%           0.00
+Basic rate:      0.00           20%          0.00
+Higher rate band at nil rate: 0.00    0%           0.00
+Higher rate:     0.00           0%          0.00
+Additional rate band at nil rate: 0.00    0%           0.00
+Additional rate:     0.00           0%          0.00
+
+Dividends from companies etc.
+Basic rate band at nil rate: 0.00    0%           0.00
+Basic rate:      17195.72           8.75%           1504.63
+Higher rate band at nil rate: 2000.00    0.00%           0.00
+Higher rate:      62924.28           33.75%           21236.94
+Additional rate band at nil rate: 0.00    0%           0.00
+Additional rate:      0.00           0%           0.00
+
+Total income on which tax has been charged:  115402.76
+Income tax due:                              29299.52
+
+Your adjusted income was:    122908.00
+Your threshold income was:   110129.52
+Your pension allowance was:  40000.00
+
+Total amount on which pension charges are due: 0.00
+Pension charge tax due:      0.00
+
+
+Total income tax already paid: 5543.00
+Total tax:                      29299.52
+
+Paid income tax as %age of total tax: 18.92%
+
+Total amount due: 23756.52
+Less amount already paid: 3581.32
+Balance due 31/01/2024: 20175.20
+
+Payments on account required: yes
+
+Payments on account due 31/01/2024: 11878.26
+Total due 31/01/2024: 32053.46
+
+Total due 31/07/2024: 11878.26
+
+
+/Users/maubergine/dev/repos/personal/calculation-engine/src/main/resources/scenarios/fy2223_cr_no.yml
+
+Pay from all employments:              40295.00
+plus benefits and expenses received:   0.00
+minus allowable expenses:              0.00
+Total from all employments:            40295.00
+Dividends from foreign companies:      82120.00
+Interest from UK banks etc.:           493.00
+Total income received:                 122908.00
+minus Personal Allowance:              1116.00
+
+Total income on which tax is due: 121792.00
+
+Your basic rate limit has been increased by 0.00 and 0.00 to 37700.00 for pension payments and
+Gift Aid payments.
+
+Pay, pensions, profit etc.
+                 Amount       Percentage       Total
+Basic rate:      37700.00           20%          7540.00
+Higher rate:     1479.00           40%          591.60
+Additional rate: 0.00           0%          0.00
+
+Savings interest from banks or building societies, securities, etc.
+Basic rate band at nil rate: 0.00    0%           0.00
+Basic rate:      0.00           0%          0.00
+Higher rate band at nil rate: 493.00    0.00%           0.00
+Higher rate:     0.00           40%          0.00
+Additional rate band at nil rate: 0.00    0%           0.00
+Additional rate:     0.00           0%          0.00
+
+Dividends from companies etc.
+Basic rate band at nil rate: 0.00    0%           0.00
+Basic rate:      0.00           0%           0.00
+Higher rate band at nil rate: 2000.00    0.00%           0.00
+Higher rate:      80120.00           33.75%           27040.50
+Additional rate band at nil rate: 0.00    0%           0.00
+Additional rate:      0.00           0%           0.00
+
+Total income on which tax has been charged:  121792.00
+Income tax due:                              35172.10
+
+Your adjusted income was:    122908.00
+Your threshold income was:   122908.00
+Your pension allowance was:  40000.00
+
+Total amount on which pension charges are due: 0.00
+Pension charge tax due:      0.00
+
+
+Total income tax already paid: 5543.00
+Total tax:                      35172.10
+
+Paid income tax as %age of total tax: 15.76%
+
+Total amount due: 29629.10
+Less amount already paid: 3581.32
+Balance due 31/01/2024: 26047.78
+
+Payments on account required: yes
+
+Payments on account due 31/01/2024: 14814.55
+Total due 31/01/2024: 40862.33
+
+Total due 31/07/2024: 14814.55
+
+
+/Users/maubergine/dev/repos/personal/calculation-engine/src/main/resources/scenarios/fy2223_mr.yml
+
+Pay from all employments:              289185.00
+plus benefits and expenses received:   852.00
+minus allowable expenses:              237.00
+Total from all employments:            289800.00
+Dividends from foreign companies:      87522.00
+Interest from UK banks etc.:           0.00
+Total income received:                 377322.00
+minus Personal Allowance:              0.00
+
+Total income on which tax is due: 377322.00
+
+Your basic rate limit has been increased by 0.00 and 3393.00 to 41093.00 for pension payments and
+Gift Aid payments.
+
+Pay, pensions, profit etc.
+                 Amount       Percentage       Total
+Basic rate:      41093.00           20%          8218.60
+Higher rate:     112300.00           40%          44920.00
+Additional rate: 136407.00           45%          61383.15
+
+Savings interest from banks or building societies, securities, etc.
+Basic rate band at nil rate: 0.00    0%           0.00
+Basic rate:      0.00           0%          0.00
+Higher rate band at nil rate: 0.00    0%           0.00
+Higher rate:     0.00           0%          0.00
+Additional rate band at nil rate: 0.00    0%           0.00
+Additional rate:     0.00           0%          0.00
+
+Dividends from companies etc.
+Basic rate band at nil rate: 0.00    0%           0.00
+Basic rate:      0.00           0%           0.00
+Higher rate band at nil rate: 0.00    0%           0.00
+Higher rate:      0.00           0%           0.00
+Additional rate band at nil rate: 2000.00    0.00%           0.00
+Additional rate:      85522.00           39.35%           33652.91
+
+Total income on which tax has been charged:  377322.00
+Income tax due:                              148174.66
+
+Your adjusted income was:    394422.00
+Your threshold income was:   373929.00
+Your pension allowance was:  5274.00
+
+Total amount on which pension charges are due: 11826.00
+Pension charge tax due:      5321.70
+
+
+Total income tax already paid: 115416.80
+Total tax:                      153496.36
+
+Paid income tax as %age of total tax: 75.19%
+
+Total amount due: 38079.56
+Less amount already paid: 0.00
+Balance due 31/01/2024: 38079.56
+
+Payments on account required: yes
+
+Payments on account due 31/01/2024: 19039.78
+Total due 31/01/2024: 57119.34
+
+Total due 31/07/2024: 19039.78
+
+
+/Users/maubergine/dev/repos/personal/calculation-engine/src/main/resources/scenarios/fy2324.yml
+
+Pay from all employments:              287949.00
+plus benefits and expenses received:   852.00
+minus allowable expenses:              0.00
+Total from all employments:            288801.00
+Dividends from foreign companies:      0.00
+Interest from UK banks etc.:           0.00
+Total income received:                 288801.00
+minus Personal Allowance:              0.00
+
+Total income on which tax is due: 288801.00
+
+Your basic rate limit has been increased by 0.00 and 0.00 to 37700.00 for pension payments and
+Gift Aid payments.
+
+Pay, pensions, profit etc.
+                 Amount       Percentage       Total
+Basic rate:      37700.00           20%          7540.00
+Higher rate:     112300.00           40%          44920.00
+Additional rate: 138801.00           45%          62460.45
+
+Savings interest from banks or building societies, securities, etc.
+Basic rate band at nil rate: 0.00    0%           0.00
+Basic rate:      0.00           0%          0.00
+Higher rate band at nil rate: 0.00    0%           0.00
+Higher rate:     0.00           0%          0.00
+Additional rate band at nil rate: 0.00    0%           0.00
+Additional rate:     0.00           0%          0.00
+
+Dividends from companies etc.
+Basic rate band at nil rate: 0.00    0%           0.00
+Basic rate:      0.00           0%           0.00
+Higher rate band at nil rate: 0.00    0%           0.00
+Higher rate:      0.00           0%           0.00
+Additional rate band at nil rate: 0.00    0%           0.00
+Additional rate:      0.00           0%           0.00
+
+Total income on which tax has been charged:  288801.00
+Income tax due:                              114920.45
+
+Your adjusted income was:    305901.00
+Your threshold income was:   288801.00
+Your pension allowance was:  7049.50
+
+Total amount on which pension charges are due: 10050.00
+Pension charge tax due:      4522.50
+
+
+Total income tax already paid: 114920.45
+Total tax:                      119442.95
+
+Paid income tax as %age of total tax: 96.21%
+
+Total amount due: 0.00
+Less amount already paid: 0.00
+Balance due 31/01/2024: 4522.50
+
+Payments on account required: no
+
+Payments on account due 31/01/2024: 0.00
+Total due 31/01/2024: 4522.50
+
+Total due 31/07/2024: 0.00
+
+
+.00
+
+
+2024: 0.00
+
+

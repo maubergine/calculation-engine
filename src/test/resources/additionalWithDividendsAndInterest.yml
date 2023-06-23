@@ -1,0 +1,11 @@
+---
+
+knownEmployments:
+  - amount: 122311.00
+    benefits:
+      - amount: 445.00
+
+dividends:
+  - amount: 223500.12
+
+untaxedInterest: 57.80

@@ -1,0 +1,11 @@
+---
+
+knownEmployments:
+  - amount: 106223.48
+    benefits:
+      - amount: 441.63
+
+knownPensions:
+  - amount: 12000.00
+    grossedUp: no
+    type: SIPP
