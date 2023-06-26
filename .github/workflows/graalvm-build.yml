@@ -10,11 +10,11 @@ jobs:
           java-version: '17.0.7'
           distribution: 'graalvm' # See 'Options' for all available distributions
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Example step
+      - name: Check GraalVM installed
         run: |
           echo "GRAALVM_HOME: $GRAALVM_HOME"
           echo "JAVA_HOME: $JAVA_HOME"
           java --version
           native-image --version
-      - name: Example step using Maven plugin  # https://graalvm.github.io/native-build-tools/latest/maven-plugin.html
-        run: mvnw -Pnative package
+      - name: Build using maven  # https://graalvm.github.io/native-build-tools/latest/maven-plugin.html
+        run: ./mvnw -Pnative package
