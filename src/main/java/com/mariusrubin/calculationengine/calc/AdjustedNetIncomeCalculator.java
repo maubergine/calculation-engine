@@ -33,7 +33,7 @@ public class AdjustedNetIncomeCalculator {
   /**
    * Calculate the adjusted net income.
    *
-   * @param taxPayer the taxper
+   * @param taxPayer the taxpayer
    * @param rates    the rates used to calculate the adjusted net income
    * @return the adjusted net income amount
    */

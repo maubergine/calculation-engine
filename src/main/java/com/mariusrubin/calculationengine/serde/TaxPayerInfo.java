@@ -188,7 +188,7 @@ public class TaxPayerInfo {
    *
    * @param paymentsMade the amount
    */
-  public void setPaymentsMade(BigDecimal paymentsMade) {
+  public void setPaymentsMade(final BigDecimal paymentsMade) {
     this.paymentsMade = paymentsMade;
   }
 

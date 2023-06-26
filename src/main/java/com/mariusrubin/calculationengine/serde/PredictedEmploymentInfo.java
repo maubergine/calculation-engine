@@ -144,7 +144,6 @@ public class PredictedEmploymentInfo {
    * Set the amount of pre-tax pay given to charity annually (via a GAYE arrangement). This should
    * be entered as the amount itself e.g. 2000.00.
    *
-   * @return the amount
    */
   public void setPayrollGiving(final BigDecimal payrollGiving) {
     this.payrollGiving = payrollGiving;

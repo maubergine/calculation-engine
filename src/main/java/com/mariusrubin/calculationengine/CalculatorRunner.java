@@ -35,7 +35,7 @@ public class CalculatorRunner implements Callable<Integer> {
 
 
   public static void main(String[] args) throws IOException {
-    int exitCode = new CommandLine(new CalculatorRunner()).execute(args);
+    final int exitCode = new CommandLine(new CalculatorRunner()).execute(args);
     System.exit(exitCode);
   }
 
@@ -48,14 +48,14 @@ public class CalculatorRunner implements Callable<Integer> {
                                                                StandardOpenOption.CREATE))) {
 
       files.filter(Files::isRegularFile)
-           .filter(f -> f.toFile().getName().endsWith(YAML_EXTENSION))
+           .filter(file -> file.toFile().getName().endsWith(YAML_EXTENSION))
            .peek(System.out::print)
-           .peek(f -> System.out.println())
-           .forEach(f -> {
-             final var loader = new YamlFileLoader(f);
+           .peek(file -> System.out.println())
+           .forEach(file -> {
+             final var loader = new YamlFileLoader(file);
              final var payer  = loader.taxPayer();
              final var result = calculator.calculate(payer);
-             out.println(f.toAbsolutePath());
+             out.println(file.toAbsolutePath());
              out.println();
              CalcPrinter.print(result, out);
            });

@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 public class SalarySacrificeCalculator {
 
   /**
-   * Calculate the total salary sacrifie amount.
+   * Calculate the total salary sacrifice amount.
    *
    * @param taxPayer the taxpayer
    * @return the amount

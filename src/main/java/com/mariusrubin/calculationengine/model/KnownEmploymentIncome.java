@@ -31,10 +31,12 @@ public class KnownEmploymentIncome extends AbstractKnownIncome implements Employ
     return IncomeType.EMPLOYMENT;
   }
 
+  @Override
   public BigDecimal getAmount() {
     return amount;
   }
 
+  @Override
   public void setAmount(final BigDecimal amount) {
     this.amount = amount;
   }

@@ -300,7 +300,7 @@ public class IncomeTaxCalculator {
 
   private static BigDecimal roundEmployment(final Income income) {
 
-    if (income instanceof EmploymentIncome employmentIncome) {
+    if (income instanceof final EmploymentIncome employmentIncome) {
       final var benefitIncome = employmentIncome.benefits()
                                                 .stream()
                                                 .map(Benefit::amount)
