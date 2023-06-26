@@ -17,4 +17,4 @@ jobs:
           java --version
           native-image --version
       - name: Build using maven  # https://graalvm.github.io/native-build-tools/latest/maven-plugin.html
-        run: ./mvnw -Pnative package
+        run: ./mvnw -Pnative -B package
