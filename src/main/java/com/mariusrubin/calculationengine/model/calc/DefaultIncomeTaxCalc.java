@@ -21,7 +21,7 @@ public class DefaultIncomeTaxCalc implements IncomeTaxCalc {
   private final Collection<TaxedAmount> taxes;
   private final BigDecimal              basicRateLimit;
 
-  public DefaultIncomeTaxCalc(final Collection<TaxedAmount> taxes, BigDecimal basicRateLimit) {
+  public DefaultIncomeTaxCalc(final Collection<TaxedAmount> taxes, final BigDecimal basicRateLimit) {
     this.taxes = Collections.unmodifiableCollection(taxes);
     this.basicRateLimit = basicRateLimit;
   }
@@ -64,6 +64,7 @@ public class DefaultIncomeTaxCalc implements IncomeTaxCalc {
                       .orElse(new DefaultTaxedAmount(ZERO, ZERO, TOTAL, Rate.zero()));
   }
 
+  @Override
   public BigDecimal basicRateLimit() {
     return basicRateLimit;
   }
@@ -75,11 +76,12 @@ public class DefaultIncomeTaxCalc implements IncomeTaxCalc {
     private final Rate       rate;
     private final IncomeType incomeType;
 
-    public CombinedTaxedAmount(final TaxedAmount t1, final TaxedAmount t2) {
-      this.amount = t1.amount().add(t2.amount());
-      this.tax = t1.tax().add(t2.tax());
-      this.rate = new CombinedTaxedAmount.InferredRate(amount, tax);
-      this.incomeType = t1.incomeType() == t2.incomeType() ? t1.incomeType() : TOTAL;
+
+    CombinedTaxedAmount(final TaxedAmount t1, final TaxedAmount t2) {
+      amount = t1.amount().add(t2.amount());
+      tax = t1.tax().add(t2.tax());
+      rate = new CombinedTaxedAmount.InferredRate(amount, tax);
+      incomeType = t1.incomeType() == t2.incomeType() ? t1.incomeType() : TOTAL;
     }
 
     @Override
@@ -106,7 +108,7 @@ public class DefaultIncomeTaxCalc implements IncomeTaxCalc {
 
       private final BigDecimal rate;
 
-      public InferredRate(final BigDecimal amount, final BigDecimal tax) {
+      InferredRate(final BigDecimal amount, final BigDecimal tax) {
         this.rate = equal(tax, ZERO)
                     ? new BigDecimal("0.0000")
                     : tax.setScale(4, RoundingMode.UNNECESSARY)

@@ -480,33 +480,21 @@ public enum UkTaxRates {
 
   /**
    * Describes the tax rates and allowances that apply to "regular" income incl. employment.
+   *
+   * @param basicRate      the basic rate
+   * @param higherRate     the higher rate
+   * @param additionalRate the additional rate
    */
-  public static class IncomeTaxRates implements LeveledRates {
-
-    private final BoundedRate basicRate;
-    private final BoundedRate higherRate;
-    private final Rate        additionalRate;
-
-    /**
-     * Build an income tax rate object.
-     *
-     * @param basicRate      the basic rate
-     * @param higherRate     the higher rate
-     * @param additionalRate the additional rate
-     */
-    public IncomeTaxRates(final BoundedRate basicRate,
-                          final BoundedRate higherRate,
-                          final Rate additionalRate) {
-      this.basicRate = basicRate;
-      this.higherRate = higherRate;
-      this.additionalRate = additionalRate;
-    }
+  public record IncomeTaxRates(BoundedRate basicRate,
+                               BoundedRate higherRate,
+                               Rate additionalRate) implements LeveledRates {
 
     /**
      * Get the basic rate of income tax.
      *
      * @return the rate
      */
+    @Override
     public BoundedRate basicRate() {
       return basicRate;
     }
@@ -516,6 +504,7 @@ public enum UkTaxRates {
      *
      * @return the rate
      */
+    @Override
     public BoundedRate higherRate() {
       return higherRate;
     }
@@ -525,6 +514,7 @@ public enum UkTaxRates {
      *
      * @return the rate
      */
+    @Override
     public Rate additionalRate() {
       return additionalRate;
     }
@@ -728,7 +718,7 @@ public enum UkTaxRates {
      * @param annualAllowance    the pension annual allowance
      * @param minimumAllowance   the minimum pension allowance in a given year i.e. the lowest
      *                           amount to which a pension can be tapered
-     * @param earningsLowerLimit the mimimum pension contribution where relevant earnings are low
+     * @param earningsLowerLimit the minimum pension contribution where relevant earnings are low
      * @param thresholdIncome    the threshold income amount
      * @param adjustedIncome     the adjusted income threshold
      * @param taperRate          the amount by which the pension allowance gets tapered down for
@@ -845,8 +835,8 @@ public enum UkTaxRates {
   public static class Class1NiRates {
 
     private final BigDecimal  primaryThreshold;
-    private final BoundedRate lowerRate;
-    private final Rate        higherRate;
+    private final BoundedRate rateToUpperEarnings;
+    private final Rate        rateAboveUpperEarnings;
     private final BigDecimal  employersRate;
 
     /**
@@ -882,8 +872,8 @@ public enum UkTaxRates {
                          final Rate rateAboveUpperEarnings,
                          final BigDecimal employersRate) {
       this.primaryThreshold = primaryThreshold;
-      this.lowerRate = rateToUpperEarnings;
-      this.higherRate = rateAboveUpperEarnings;
+      this.rateToUpperEarnings = rateToUpperEarnings;
+      this.rateAboveUpperEarnings = rateAboveUpperEarnings;
       this.employersRate = employersRate;
     }
 
@@ -902,7 +892,7 @@ public enum UkTaxRates {
      * @return the rate
      */
     public BoundedRate rateToUpperEarnings() {
-      return lowerRate;
+      return rateToUpperEarnings;
     }
 
     /**
@@ -911,7 +901,7 @@ public enum UkTaxRates {
      * @return the rate
      */
     public Rate rateAboveUpperEarnings() {
-      return higherRate;
+      return rateAboveUpperEarnings;
     }
 
     /**

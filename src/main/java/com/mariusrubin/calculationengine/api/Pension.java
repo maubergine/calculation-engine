@@ -29,7 +29,7 @@ public interface Pension {
   }
 
   /**
-   * The tyoe of the pension.
+   * The type of the pension.
    *
    * @return the type
    */
