@@ -120,7 +120,7 @@
                         </executions>
                         <configuration>
                             <buildArgs>
-                                <arg>-H:ReflectionConfigurationFiles=META-INF/native-image/reflect-config.json</arg>
+                                <arg>-H:ReflectionConfigurationFiles=${project.basedir}/META-INF/native-image/reflect-config.json</arg>
                             </buildArgs>
                         </configuration>
                     </plugin>
