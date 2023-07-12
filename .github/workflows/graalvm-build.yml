@@ -8,7 +8,7 @@ jobs:
       - uses: graalvm/setup-graalvm@v1
         with:
           java-version: '17.0.7'
-          distribution: 'graalvm' # See 'Options' for all available distributions
+          distribution: 'graalvm-community' # See 'Options' for all available distributions
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Check GraalVM installed
         run: |
