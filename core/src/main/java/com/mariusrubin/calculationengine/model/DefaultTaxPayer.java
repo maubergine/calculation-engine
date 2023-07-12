@@ -1,5 +1,8 @@
 package com.mariusrubin.calculationengine.model;
 
+import static com.mariusrubin.calculationengine.util.TaxMathUtils.ZERO;
+import static com.mariusrubin.calculationengine.util.TaxMathUtils.twoDec;
+
 import com.mariusrubin.calculationengine.api.EmploymentIncome;
 import com.mariusrubin.calculationengine.api.Gift;
 import com.mariusrubin.calculationengine.api.Income;
@@ -7,7 +10,6 @@ import com.mariusrubin.calculationengine.api.IncomeType;
 import com.mariusrubin.calculationengine.api.Pension;
 import com.mariusrubin.calculationengine.api.TaxPayer;
 import com.mariusrubin.calculationengine.serde.TaxPayerInfo;
-import com.mariusrubin.calculationengine.util.TaxMathUtils;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
@@ -65,17 +67,19 @@ public class DefaultTaxPayer implements TaxPayer {
 
   @Override
   public BigDecimal pensionAllowanceCarryForward() {
-    return Objects.requireNonNullElse(info.getPensionAllowanceCarryForward(), TaxMathUtils.ZERO);
+    return info.getPensionAllowanceCarryForward() == null
+           ? ZERO
+           : twoDec(info.getPensionAllowanceCarryForward());
   }
 
   @Override
   public BigDecimal paymentsMade() {
-    return Objects.requireNonNullElse(info.getPaymentsMade(), TaxMathUtils.ZERO);
+    return info.getPaymentsMade() == null ? ZERO : twoDec(info.getPaymentsMade());
   }
 
   @Override
   public BigDecimal taxPaidOverride() {
-    return info.getTaxPaidOverride();
+    return info.getTaxPaidOverride() == null ? null : twoDec(info.getTaxPaidOverride());
   }
 
   private Stream<Income> employmentIncomes() {
