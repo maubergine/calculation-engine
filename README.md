@@ -17,7 +17,7 @@ You will need a JDK installed - if you feel like it you could use
 2. This should leave you with a file called `calculation-engine-core...-shaded.jar` in 
    `core/target`.
 3. Create a scenarios folder (the CLI assumes a folder in the same directory as the jar called
-   `scenarios`) and add scenarios using the [YAML format](#YAML-format).
+   `scenarios`) and add scenarios in separate files using the [YAML format](#YAML-format).
 4. Run the CLI using `java -jar calc*shaded.jar <blank OR path to scenarios>.
 5. You should get an output file in the same directory as the jar called `output.txt`.
 
@@ -34,10 +34,6 @@ Repository Layout
 ### `core` ###
 Contains engine code and model. This is in its own module rather than at the project root so that 
 it is easier in future to build out web/service layers.
-
-
-Details of how to configure the YAML file and run the CLI can be found in
-`src/test/resources/sample.yml`.
 
 
 Contributing

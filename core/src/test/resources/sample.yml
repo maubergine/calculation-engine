@@ -1,10 +1,4 @@
 ---
-# Make sure you have java installed.
-# Then in the commmand line navigate to the folder containing the jar and run:
-# java -jar calculation-engine-0.0.1-SNAPSHOT.jar scenarios
-# Assuming no errors a new file called output.txt will be generated with (badly formatted)
-# tax results for each item in your scenarios folder.
-
 # Delete the income that works best - knownIncomes are for where you want to manually enter your
 # predicted P60 amount (or already have it). predictedIncomes are for where you want to project
 # an income

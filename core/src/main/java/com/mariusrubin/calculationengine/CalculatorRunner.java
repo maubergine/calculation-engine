@@ -22,7 +22,9 @@ public class CalculatorRunner implements Callable<Integer> {
 
   private static final String YAML_EXTENSION = "yml";
 
-  @Parameters(index = "0", description = "The directory containing tax scenarios", defaultValue = "./scenarios")
+  @Parameters(index = "0",
+              description = "The directory containing tax scenarios",
+              defaultValue = "./scenarios")
   private Path scenarioDir;
 
   @Option(names = {"-o", "--output-file"},
@@ -49,6 +51,7 @@ public class CalculatorRunner implements Callable<Integer> {
 
       files.filter(Files::isRegularFile)
            .filter(file -> file.toFile().getName().endsWith(YAML_EXTENSION))
+           .sorted()
            .peek(System.out::print)
            .peek(file -> System.out.println())
            .forEach(file -> {
