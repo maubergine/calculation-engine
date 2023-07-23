@@ -91,6 +91,8 @@ public class DefaultTaxCalculator implements TaxCalculator {
                                          final PensionCalc pensionAnalysis) {
 
     //TODO add NI rebate amount to this list
+    //TODO deal with the fact that contribution to defined benefit is valued differently
+    //when contributing vs. when increasing pension allowance
     final var totalPensionContribution = roundDownInt(sum(totalSipp.calculate(payer, rates),
                                                           employerPension.calculate(payer),
                                                           salarySacrifice.calculate(payer)));

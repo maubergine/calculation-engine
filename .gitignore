@@ -37,8 +37,9 @@ build/
 .DS_Store
 
 
-### Scenarios ###
-core/src/main/resources/
+### Scenarios/Runs ###
+scenarios/*
+output*.txt
 
 ### Custom ###
 dependency-reduced-pom.xml
