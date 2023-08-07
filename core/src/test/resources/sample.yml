@@ -1,0 +1,65 @@
+---
+# Delete the income that works best - knownIncomes are for where you want to manually enter your
+# predicted P60 amount (or already have it). predictedIncomes are for where you want to project
+# an income
+
+predictedEmployments:
+  - base: 45648
+    holidayDays: 5
+    knownBonus: 1000
+    payrollGiving: 1500
+    benefits:
+      - amount: 455.00
+
+
+knownEmployments:
+  #   Amount should be the same as your P60 income.
+  - amount: 4456.48
+    #   For each taxable benefit add a line as per the below format.
+    benefits:
+      - amount: 44.00
+    #   For each tax-deductible expense add an amount line as per the below format.
+    expenses:
+      - amount: 237.00
+
+# Does what it says on the tin. You can either add each dividend payment separately as an
+# amount, or just put in the total. Dividends are assumed to be untaxed.
+dividends:
+  - amount: 1132.32
+
+# This is for pension contributions. You can enter a type/amount pair for each one.
+knownPensions:
+  # Example for where your employer has contributed (note if you have a salary sacrifice arrangement
+  # this would be included in here).
+  - type: EMPLOYER
+    amount: 4554
+
+# This is for pension contributions that come from a predicted percentage of salary.
+predictedPensions:
+  # Example for where your employer has contributed (note if you have a salary sacrifice arrangement
+  # this would be included in here).
+  - income: 40000.00 #i.e. the salary amount the percentage acts against
+    percentage: 0.09
+
+# Use this to put any gift-aid eligible gifts you have done through the year. For convenience this
+# will add up the amounts.
+gifts:
+  - amount: 122.80
+  - amount: 38.00
+
+# By default the calculator assumes your employment income has you pay the correct amount of tax.
+# If you know that you will have paid a different amount of tax you can use the below value to
+# override. You can delete the row entirely if it does not apply.
+taxPaidOverride: 1123.22
+
+# If you are consuming some pension allowance enter it here. You can delete the row entirely if
+# it does not apply.
+pensionAllowanceCarryForward: 1274.00
+
+# This should be used to declare any interest income that has not been taxed but should be. This
+# includes interest on savings accounts (but not ISAs).
+untaxedInterest: 312.22
+
+# This allows you to declare any payments on account already made, that are then offset against
+# the future calculated payment.
+paymentsMade: 2200.00
