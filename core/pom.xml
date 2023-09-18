@@ -21,7 +21,7 @@
         <maven.compiler.source>${java.specification.version}</maven.compiler.source>
         <maven.compiler.target>${java.specification.version}</maven.compiler.target>
         <maven-shade-plugin.version>3.5.0</maven-shade-plugin.version>
-        <native-maven-plugin.version>0.9.23</native-maven-plugin.version>
+        <native-maven-plugin.version>0.9.27</native-maven-plugin.version>
     </properties>
     <dependencies>
         <dependency>
