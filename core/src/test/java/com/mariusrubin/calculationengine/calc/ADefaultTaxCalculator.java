@@ -288,13 +288,13 @@ public class ADefaultTaxCalculator {
     assertThat(result.incomeTax().taxOn(EMPLOYMENT, ADDITIONAL).amount()).isEqualTo("120141.00");
     assertThat(result.incomeTax().taxOn(EMPLOYMENT, ADDITIONAL).tax()).isEqualTo("54063.45");
 
-    assertThat(result.incomeTax().taxOn(PENSION_CHARGE, ADDITIONAL).amount()).isEqualTo("11640.00");
-    assertThat(result.incomeTax().taxOn(PENSION_CHARGE, ADDITIONAL).tax()).isEqualTo("5238.00");
+    assertThat(result.incomeTax().taxOn(PENSION_CHARGE, ADDITIONAL).amount()).isEqualTo("1640.00");
+    assertThat(result.incomeTax().taxOn(PENSION_CHARGE, ADDITIONAL).tax()).isEqualTo("738.00");
 
-    assertThat(result.pension().allowance()).isEqualTo("34359.50");
+    assertThat(result.pension().allowance()).isEqualTo("44359.50");
     assertThat(result.pension().adjustedIncome()).isEqualTo("291281.00");
     assertThat(result.pension().thresholdIncome()).isEqualTo("268281.00");
-    assertThat(result.pension().allowanceTaperAmount()).isEqualTo("25640.50");
+    assertThat(result.pension().allowanceTaperAmount()).isEqualTo("15640.50");
 
   }
 
