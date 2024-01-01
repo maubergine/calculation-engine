@@ -272,7 +272,7 @@ public enum UkTaxRates {
               10_000,
               3_600,
               200_000,
-              240_000,
+              260_000,
               0.5f),
           new Class1NiRates(
               1_048,
