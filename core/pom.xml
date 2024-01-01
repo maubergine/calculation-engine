@@ -15,7 +15,7 @@
         <jackson-dataformat-yaml.version>2.16.1</jackson-dataformat-yaml.version>
         <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
         <picocli.version>4.7.5</picocli.version>
-        <assertj-core.version>3.24.2</assertj-core.version>
+        <assertj-core.version>3.25.0</assertj-core.version>
         <junit-jupiter-api.version>5.10.1</junit-jupiter-api.version>
         <maven-surefire-plugin.version>3.2.3</maven-surefire-plugin.version>
         <maven.compiler.source>${java.specification.version}</maven.compiler.source>
