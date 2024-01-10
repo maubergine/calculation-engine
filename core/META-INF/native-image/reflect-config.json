@@ -34,14 +34,25 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"com.mariusrubin.calculationengine.model.DefinedLumpPension",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] },
+    {"name":"setAmount","parameterTypes":["java.math.BigDecimal"] },
+    {"name":"setCostPerHundredYearlyPay","parameterTypes":["java.math.BigDecimal"] }
+  ]
+},
+{
   "name":"com.mariusrubin.calculationengine.model.KnownEmploymentIncome",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"setAmount","parameterTypes":["java.math.BigDecimal"] }, 
-    {"name":"setBenefits","parameterTypes":["java.util.List"] }, 
+    {"name":"<init>","parameterTypes":[] },
+    {"name":"setAmount","parameterTypes":["java.math.BigDecimal"] },
+    {"name":"setBenefits","parameterTypes":["java.util.List"] },
     {"name":"setExpenses","parameterTypes":["java.util.List"] }
   ]
 },
@@ -51,7 +62,7 @@
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"<init>","parameterTypes":[] },
     {"name":"setAmount","parameterTypes":["java.math.BigDecimal"] },
     {"name":"setGrossedUp","parameterTypes":["boolean"] },
     {"name":"setType","parameterTypes":["com.mariusrubin.calculationengine.api.PensionType"] }
@@ -63,8 +74,8 @@
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"setIncome","parameterTypes":["java.math.BigDecimal"] }, 
+    {"name":"<init>","parameterTypes":[] },
+    {"name":"setIncome","parameterTypes":["java.math.BigDecimal"] },
     {"name":"setPercentage","parameterTypes":["java.math.BigDecimal"] }
   ]
 },
@@ -74,10 +85,10 @@
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"setBase","parameterTypes":["java.math.BigDecimal"] }, 
+    {"name":"<init>","parameterTypes":[] },
+    {"name":"setBase","parameterTypes":["java.math.BigDecimal"] },
     {"name":"setBenefits","parameterTypes":["java.util.List"] },
-    {"name":"setHolidayDays","parameterTypes":["int"] }, 
+    {"name":"setHolidayDays","parameterTypes":["int"] },
     {"name":"setKnownBonus","parameterTypes":["java.math.BigDecimal"] },
     {"name":"setPredictedBonus","parameterTypes":["java.math.BigDecimal"] },
     {"name":"setPayrollGiving","parameterTypes":["java.math.BigDecimal"] },
@@ -90,16 +101,17 @@
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"setDividends","parameterTypes":["java.util.List"] }, 
-    {"name":"setGifts","parameterTypes":["java.util.List"] }, 
-    {"name":"setKnownEmployments","parameterTypes":["java.util.List"] }, 
-    {"name":"setKnownPensions","parameterTypes":["java.util.List"] }, 
-    {"name":"setPaymentsMade","parameterTypes":["java.math.BigDecimal"] }, 
-    {"name":"setPensionAllowanceCarryForward","parameterTypes":["java.math.BigDecimal"] }, 
-    {"name":"setPredictedEmployments","parameterTypes":["java.util.List"] }, 
-    {"name":"setPredictedPensions","parameterTypes":["java.util.List"] }, 
-    {"name":"setTaxPaidOverride","parameterTypes":["java.math.BigDecimal"] }, 
+    {"name":"<init>","parameterTypes":[] },
+    {"name":"setDefinedLumpPensions","parameterTypes":["java.util.List"] },
+    {"name":"setDividends","parameterTypes":["java.util.List"] },
+    {"name":"setGifts","parameterTypes":["java.util.List"] },
+    {"name":"setKnownEmployments","parameterTypes":["java.util.List"] },
+    {"name":"setKnownPensions","parameterTypes":["java.util.List"] },
+    {"name":"setPaymentsMade","parameterTypes":["java.math.BigDecimal"] },
+    {"name":"setPensionAllowanceCarryForward","parameterTypes":["java.math.BigDecimal"] },
+    {"name":"setPredictedEmployments","parameterTypes":["java.util.List"] },
+    {"name":"setPredictedPensions","parameterTypes":["java.util.List"] },
+    {"name":"setTaxPaidOverride","parameterTypes":["java.math.BigDecimal"] },
     {"name":"setUntaxedInterest","parameterTypes":["java.math.BigDecimal"] }
   ]
 }

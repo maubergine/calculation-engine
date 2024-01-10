@@ -91,7 +91,8 @@ public class IncomeTaxCalculator {
   public IncomeTaxCalc calculate(final UkTaxRates rates,
                                  final Collection<Income> incomes,
                                  final PersonalAllowanceCalc pACalc,
-                                 final BasicRateAdjustmentCalc basicRateAdjustmentCalc) {
+                                 final BasicRateAdjustmentCalc basicRateAdjustmentCalc,
+                                 final BigDecimal totalRarContribs) {
 
     //Order the incomes according to the order of taxation - this relies on the specific order of
     //declarations in the IncomeType enum.
@@ -102,7 +103,9 @@ public class IncomeTaxCalculator {
 
     final List<TaxedAmount> taxes = new ArrayList<>();
 
-    var paRemaining = pACalc.allowance();
+    final var initialAllowanceRemaining = pACalc.allowance().add(totalRarContribs);
+
+    var allowanceRemaining = initialAllowanceRemaining;
 
     final var initialBasicLimit = twoDec(rates.incomeTaxRates()
                                               .basicRate()
@@ -127,10 +130,11 @@ public class IncomeTaxCalculator {
 
       BigDecimal taxable;
 
-      //If there is some personal allowance to be consumed, consume it.
-      if (TaxMathUtils.positive(paRemaining)) {
-        taxable = TaxMathUtils.max(roundedAmount.subtract(paRemaining), TaxMathUtils.ZERO);
-        paRemaining = TaxMathUtils.max(paRemaining.subtract(roundedAmount), TaxMathUtils.ZERO);
+      //If there is some personal allowance or rar contribution to be consumed, consume it.
+      if (TaxMathUtils.positive(allowanceRemaining)) {
+        taxable = TaxMathUtils.max(roundedAmount.subtract(allowanceRemaining), TaxMathUtils.ZERO);
+        allowanceRemaining = TaxMathUtils.max(allowanceRemaining.subtract(roundedAmount),
+                                              TaxMathUtils.ZERO);
       } else {
         taxable = roundedAmount;
       }
@@ -185,15 +189,16 @@ public class IncomeTaxCalculator {
     }
 
     //Due to how dividend and savings allowances work (and how HMRC represents this back to the
-    //taxpayer), you need to undo the tax up to the allowance amount. Where tax has been paid across
+    //taxpayer), you need to undo the tax, rather than just treat the income as non-existent
+    //as is the case for personal allowance or RAR contributions. Where tax has been paid across
     //multiple bands (e.g. because the savings income is what causes someone to move from basic to
-    //higher rate), then you need to progressively "undo" tax in order from highest rate to lowest.
+    //higher rate), then you need to progressively "undo" tax.
 
     final var postDividends = postProcessDividends(taxes, rates);
 
     final var postSavings = postProcessSavings(postDividends, rates);
 
-    return new DefaultIncomeTaxCalc(postSavings, initialBasicLimit);
+    return new DefaultIncomeTaxCalc(postSavings, initialBasicLimit, initialAllowanceRemaining);
 
   }
 
@@ -237,10 +242,9 @@ public class IncomeTaxCalculator {
     final var mutableTaxes       = new ArrayList<>(taxes);
     var       allowanceRemaining = allowance;
 
-    //Post-processing is applied based on the highest tax first, hence the sort.
     final var toProcess = taxes.stream()
                                .filter(t -> t.incomeType() == type)
-                               .sorted(comparing((TaxedAmount t) -> t.rate().level()).reversed())
+                               .sorted(comparing(t -> t.rate().level()))
                                .toList();
 
     for (final TaxedAmount tax : toProcess) {

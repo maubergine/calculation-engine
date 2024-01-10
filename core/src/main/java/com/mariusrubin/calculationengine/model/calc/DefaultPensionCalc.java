@@ -12,6 +12,7 @@ import java.math.BigDecimal;
  * @param adjustedIncome       the calculated adjusted income
  * @param allowanceTaperAmount the amount by which the allowance has been tapered
  * @param allowance            the allowance after tapering has been applied
+ * @param contributionsToRars  the total amount of contributions made to annuity contracts
  * @author Marius Rubin
  * @since 0.1.0
  */
@@ -20,6 +21,7 @@ public record DefaultPensionCalc(BigDecimal baseAllowance,
                                  BigDecimal thresholdIncome,
                                  BigDecimal adjustedIncome,
                                  BigDecimal allowanceTaperAmount,
-                                 BigDecimal allowance) implements PensionCalc {
+                                 BigDecimal allowance,
+                                 BigDecimal contributionsToRars) implements PensionCalc {
 
 }

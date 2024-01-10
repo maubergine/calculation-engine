@@ -1,6 +1,7 @@
 package com.mariusrubin.calculationengine.serde;
 
 import com.mariusrubin.calculationengine.model.DefaultGift;
+import com.mariusrubin.calculationengine.model.DefinedLumpPension;
 import com.mariusrubin.calculationengine.model.DividendIncome;
 import com.mariusrubin.calculationengine.model.KnownEmploymentIncome;
 import com.mariusrubin.calculationengine.model.KnownPension;
@@ -23,6 +24,7 @@ public class TaxPayerInfo {
   private List<DividendIncome>           dividends            = Collections.emptyList();
   private List<PredictedEmployerPension> predictedPensions    = Collections.emptyList();
   private List<KnownPension>             knownPensions        = Collections.emptyList();
+  private List<DefinedLumpPension>       definedLumpPensions  = Collections.emptyList();
   private List<DefaultGift>              gifts                = Collections.emptyList();
   private BigDecimal                     untaxedInterest;
   private BigDecimal                     pensionAllowanceCarryForward;
@@ -118,6 +120,25 @@ public class TaxPayerInfo {
    */
   public void setKnownPensions(final List<KnownPension> knownPensions) {
     this.knownPensions = Collections.unmodifiableList(knownPensions);
+  }
+
+  /**
+   * Get the list of defined lump pension contributions.
+   *
+   * @return the pension contributions
+   */
+  public List<DefinedLumpPension> getDefinedLumpPensions() {
+    return Collections.unmodifiableList(definedLumpPensions);
+  }
+
+  /**
+   * Set the list of defined lump pension contributions. Note this overwrites previously supplied
+   * data.
+   *
+   * @param definedLumpPensions the contributions
+   */
+  public void setDefinedLumpPensions(final List<DefinedLumpPension> definedLumpPensions) {
+    this.definedLumpPensions = Collections.unmodifiableList(definedLumpPensions);
   }
 
   /**

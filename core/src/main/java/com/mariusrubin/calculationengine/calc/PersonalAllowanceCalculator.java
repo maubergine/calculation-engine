@@ -1,8 +1,9 @@
 package com.mariusrubin.calculationengine.calc;
 
+import static com.mariusrubin.calculationengine.util.TaxMathUtils.max;
 import static com.mariusrubin.calculationengine.util.TaxMathUtils.min;
+import static com.mariusrubin.calculationengine.util.TaxMathUtils.roundUpInt;
 import static com.mariusrubin.calculationengine.util.TaxMathUtils.twoDec;
-import static java.math.RoundingMode.HALF_UP;
 
 import com.mariusrubin.calculationengine.UkTaxRates;
 import com.mariusrubin.calculationengine.UkTaxRates.PersonalAllowanceRates;
@@ -21,6 +22,7 @@ import java.math.BigDecimal;
 public class PersonalAllowanceCalculator {
 
   private final AdjustedNetIncomeCalculator adjustedNetIncomeCalculator = new AdjustedNetIncomeCalculator();
+  private final RarTotalCalculator          rarTotalCalculator          = new RarTotalCalculator();
 
   /**
    * Calculate the personal allowance.
@@ -33,6 +35,7 @@ public class PersonalAllowanceCalculator {
                                          final UkTaxRates rates) {
 
     return calculate(adjustedNetIncomeCalculator.calculate(taxPayer, rates),
+                     rarTotalCalculator.calculate(taxPayer),
                      rates.personalAllowanceRates());
 
   }
@@ -45,12 +48,15 @@ public class PersonalAllowanceCalculator {
    * @return the calculation
    */
   public DefaultPersonalAllowanceCalc calculate(final BigDecimal adjustedNetIncome,
+                                                final BigDecimal contributionsToRars,
                                                 final PersonalAllowanceRates paRates) {
 
     final var allowance = twoDec(paRates.amount());
 
-    final var amountOverThreshold = TaxMathUtils.max(TaxMathUtils.ZERO,
-                                                     adjustedNetIncome.subtract(paRates.threshold()));
+    final var adjustedNetIncomeAfterRar = adjustedNetIncome.subtract(contributionsToRars);
+
+    final var amountOverThreshold = max(TaxMathUtils.ZERO,
+                                        adjustedNetIncomeAfterRar.subtract(paRates.threshold()));
 
     if (amountOverThreshold.compareTo(TaxMathUtils.ZERO) == 0) {
       return new DefaultPersonalAllowanceCalc(allowance, TaxMathUtils.ZERO, TaxMathUtils.ZERO);
@@ -59,8 +65,8 @@ public class PersonalAllowanceCalculator {
     final var taperAmount = twoDec(min(amountOverThreshold.multiply(paRates.taperRate()),
                                        paRates.amount()));
 
-    final var allowanceRecalc = TaxMathUtils.max(TaxMathUtils.ZERO, allowance.subtract(taperAmount))
-                                            .setScale(2, HALF_UP);
+    final var allowanceRecalc = roundUpInt(TaxMathUtils.max(TaxMathUtils.ZERO,
+                                                            allowance.subtract(taperAmount)));
 
     return new DefaultPersonalAllowanceCalc(allowanceRecalc, amountOverThreshold, taperAmount);
 

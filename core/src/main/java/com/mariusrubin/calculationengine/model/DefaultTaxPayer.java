@@ -53,7 +53,9 @@ public class DefaultTaxPayer implements TaxPayer {
 
   @Override
   public List<Pension> pensions() {
-    return Stream.of(info.getPredictedPensions(), info.getKnownPensions())
+    return Stream.of(info.getPredictedPensions(),
+                     info.getKnownPensions(),
+                     info.getDefinedLumpPensions())
                  .filter(Objects::nonNull)
                  .flatMap(Collection::stream)
                  .map(Pension.class::cast)

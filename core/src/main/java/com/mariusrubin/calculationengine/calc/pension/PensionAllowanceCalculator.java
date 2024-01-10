@@ -13,6 +13,7 @@ import com.mariusrubin.calculationengine.UkTaxRates;
 import com.mariusrubin.calculationengine.UkTaxRates.PensionRates;
 import com.mariusrubin.calculationengine.api.TaxPayer;
 import com.mariusrubin.calculationengine.api.calc.PensionCalc;
+import com.mariusrubin.calculationengine.calc.RarTotalCalculator;
 import com.mariusrubin.calculationengine.model.calc.DefaultPensionCalc;
 import java.math.BigDecimal;
 
@@ -33,6 +34,8 @@ public class PensionAllowanceCalculator {
   private final RelevantEarningsCalculator       relevantEarningsCalculator       = new RelevantEarningsCalculator();
   private final PensionThresholdIncomeCalculator pensionThresholdIncomeCalculator = new PensionThresholdIncomeCalculator();
   private final AdjustedIncomeCalculator         adjustedIncomeCalculator         = new AdjustedIncomeCalculator();
+  private final RarTotalCalculator               rarTotalCalculator               = new RarTotalCalculator();
+
 
   /**
    * Calculate the pension allowance
@@ -47,9 +50,15 @@ public class PensionAllowanceCalculator {
     final var thresholdIncome       = pensionThresholdIncomeCalculator.calculate(taxPayer, rates);
     final var adjustedIncome        = adjustedIncomeCalculator.calculate(taxPayer);
     final var carryForward          = taxPayer.pensionAllowanceCarryForward();
+    final var contributionsToRars   = rarTotalCalculator.calculate(taxPayer);
 
     //TODO cope with the employer adding back NI scenario.
-    return calculate(rates, totalRelevantEarnings, thresholdIncome, adjustedIncome, carryForward);
+    return calculate(rates,
+                     totalRelevantEarnings,
+                     thresholdIncome,
+                     adjustedIncome,
+                     carryForward,
+                     contributionsToRars);
 
   }
 
@@ -65,7 +74,8 @@ public class PensionAllowanceCalculator {
                                final BigDecimal totalRelevantEarnings,
                                final BigDecimal thresholdIncome,
                                final BigDecimal adjustedIncome,
-                               final BigDecimal carryForward) {
+                               final BigDecimal carryForward,
+                               final BigDecimal contributionsToRars) {
 
     final var pRates = rates.pensionRates();
 
@@ -92,7 +102,8 @@ public class PensionAllowanceCalculator {
                                   thresholdIncome,
                                   adjustedIncome,
                                   taperAmount,
-                                  actualAllowance);
+                                  actualAllowance,
+                                  contributionsToRars);
 
   }
 

@@ -1,5 +1,7 @@
 package com.mariusrubin.calculationengine.calc;
 
+import static com.mariusrubin.calculationengine.util.TaxMathUtils.roundUpInt;
+
 import com.mariusrubin.calculationengine.UkTaxRates;
 import com.mariusrubin.calculationengine.api.TaxPayer;
 import com.mariusrubin.calculationengine.api.calc.BasicRateAdjustmentCalc;
@@ -43,7 +45,7 @@ public class BasicRateAdjustmentCalculator {
                                            final BigDecimal totalPension) {
 
     //TODO need to deal with the limit for qualifying gift amounts being 4x the total tax paid
-    final var totalAdjustment = totalGifts.add(totalPension);
+    final var totalAdjustment = totalGifts.add(roundUpInt(totalPension));
     return new DefaultBasicRateAdjustmentCalc(totalGifts, totalPension, totalAdjustment);
 
   }

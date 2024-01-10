@@ -58,4 +58,13 @@ public interface PensionCalc {
    */
   BigDecimal allowance();
 
+
+  /**
+   * The total amount of contributions made to annuity contracts or similar (e.g. lump sum
+   * contributions to defined benefits schemes).
+   *
+   * @return the total amount of the contributions
+   */
+  BigDecimal contributionsToRars();
+
 }

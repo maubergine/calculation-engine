@@ -8,7 +8,10 @@ package com.mariusrubin.calculationengine.api;
  */
 public enum PensionType {
 
+  DEFINED_BENEFIT,
+  DEFINED_BENEFIT_LUMP,
   EMPLOYER,
+  RAR,
   SIPP
 
 }
