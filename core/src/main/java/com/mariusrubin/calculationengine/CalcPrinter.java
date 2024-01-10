@@ -45,6 +45,9 @@ public final class CalcPrinter {
             Interest from UK banks etc.:           %s
             Total income received:                 %s
             minus Personal Allowance:              %s
+            minus Payments into a retirement       %s
+              annuity contract etc.
+            Total                                  %s  
                 
             Total income on which tax is due: %s
                         
@@ -109,6 +112,8 @@ public final class CalcPrinter {
         result.income().totalInterest(),
         result.income().netIncome(),
         result.personalAllowance().allowance(),
+        result.pension().contributionsToRars(),
+        result.incomeTax().allowanceApplied(),
         result.incomeTax().totalTaxExcluding(PENSION_CHARGE).amount(),
         result.basicRateAdjustment().pensionPayments(),
         result.basicRateAdjustment().giftAidPayments(),

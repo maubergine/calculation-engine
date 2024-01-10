@@ -34,6 +34,12 @@ knownPensions:
   - type: EMPLOYER
     amount: 4554
 
+# This is for lump sum contributions to defined benefit pensions. You can enter the amount of the
+# lump sum contribution and the cost of buying an extra £100/year of pension pay (varies by scheme).
+definedLumpPensions:
+  - amount: 12000
+    costPerHundredYearlyPay: 794.00
+
 # This is for pension contributions that come from a predicted percentage of salary.
 predictedPensions:
   # Example for where your employer has contributed (note if you have a salary sacrifice arrangement

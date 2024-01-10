@@ -28,6 +28,7 @@ public class FinancialYear {
 
   /**
    * Get the start date of the year.
+   *
    * @return the start date
    */
   public LocalDate getStartDate() {
@@ -36,6 +37,7 @@ public class FinancialYear {
 
   /**
    * Get the end date of the year.
+   *
    * @return the end date
    */
   public LocalDate getEndDate() {

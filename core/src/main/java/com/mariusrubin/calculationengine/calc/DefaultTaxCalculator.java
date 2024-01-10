@@ -33,8 +33,10 @@ public class DefaultTaxCalculator implements TaxCalculator {
   private final PensionAllowanceCalculator     pensionAllowance    = new PensionAllowanceCalculator();
   private final TotalEmployerPensionCalculator employerPension     = new TotalEmployerPensionCalculator();
   private final SalarySacrificeCalculator      salarySacrifice     = new SalarySacrificeCalculator();
+  private final DefinedBenefitValueCalculator  definedBenefit      = new DefinedBenefitValueCalculator();
   private final BasicRateAdjustmentCalculator  basicRateAdjustment = new BasicRateAdjustmentCalculator();
   private final PersonalAllowanceCalculator    personalAllowance   = new PersonalAllowanceCalculator();
+  private final RarTotalCalculator             rarTotalCalculator  = new RarTotalCalculator();
   private final IncomeCalculator               income              = new IncomeCalculator();
 
   private final UkTaxRates rates;
@@ -61,10 +63,13 @@ public class DefaultTaxCalculator implements TaxCalculator {
 
     final var withPensionAA = addPensionCharges(payer, rates, pensionAnalysis);
 
+    final var totalRarContribs = rarTotalCalculator.calculate(payer);
+
     final var ita = incomeTax.calculate(rates,
                                         withPensionAA,
                                         paAnalysis,
-                                        basicAdjustmentAnalysis);
+                                        basicAdjustmentAnalysis,
+                                        totalRarContribs);
 
     //TODO some kind of NI projection
     //TODO BigDecimal scale for all model items
@@ -91,11 +96,10 @@ public class DefaultTaxCalculator implements TaxCalculator {
                                          final PensionCalc pensionAnalysis) {
 
     //TODO add NI rebate amount to this list
-    //TODO deal with the fact that contribution to defined benefit is valued differently
-    //when contributing vs. when increasing pension allowance
     final var totalPensionContribution = roundDownInt(sum(totalSipp.calculate(payer, rates),
                                                           employerPension.calculate(payer),
-                                                          salarySacrifice.calculate(payer)));
+                                                          salarySacrifice.calculate(payer),
+                                                          definedBenefit.calculate(payer)));
 
     //If your pension contribution is under your allowance then no additional charges.
     if (lessThanOrEqual(totalPensionContribution, pensionAnalysis.allowance())) {

@@ -38,7 +38,7 @@ public class APaymentDueCalculator {
                                             IncomeType.EMPLOYMENT,
                                             new DefaultRate(BASIC, new BigDecimal("0.2")));
 
-    final var itc = new DefaultIncomeTaxCalc(List.of(tax1), BigDecimal.ZERO);
+    final var itc = new DefaultIncomeTaxCalc(List.of(tax1), BigDecimal.ZERO, BigDecimal.ZERO);
 
     final var janDate  = LocalDate.of(2022, 1, 31);
     final var julyDate = LocalDate.of(2022, 7, 31);
@@ -73,7 +73,7 @@ public class APaymentDueCalculator {
                                             IncomeType.DIVIDENDS,
                                             new DefaultRate(BASIC, new BigDecimal("0.07")));
 
-    final var itc = new DefaultIncomeTaxCalc(List.of(tax1, tax2), BigDecimal.ZERO);
+    final var itc = new DefaultIncomeTaxCalc(List.of(tax1, tax2), BigDecimal.ZERO, BigDecimal.ZERO);
 
     final var janDate  = LocalDate.of(2021, 1, 31);
     final var julyDate = LocalDate.of(2021, 7, 31);
@@ -113,7 +113,9 @@ public class APaymentDueCalculator {
                                             IncomeType.INTEREST,
                                             new DefaultRate(BASIC, new BigDecimal("0.2")));
 
-    final var itc = new DefaultIncomeTaxCalc(List.of(tax1, tax2, tax3), BigDecimal.ZERO);
+    final var itc = new DefaultIncomeTaxCalc(List.of(tax1, tax2, tax3),
+                                             BigDecimal.ZERO,
+                                             BigDecimal.ZERO);
 
     final var janDate  = LocalDate.of(2021, 1, 31);
     final var julyDate = LocalDate.of(2021, 7, 31);
@@ -156,7 +158,9 @@ public class APaymentDueCalculator {
                                             IncomeType.INTEREST,
                                             new DefaultRate(BASIC, new BigDecimal("0.2")));
 
-    final var itc = new DefaultIncomeTaxCalc(List.of(tax1, tax2, tax3), BigDecimal.ZERO);
+    final var itc = new DefaultIncomeTaxCalc(List.of(tax1, tax2, tax3),
+                                             BigDecimal.ZERO,
+                                             BigDecimal.ZERO);
 
     final var janDate  = LocalDate.of(2021, 1, 31);
     final var julyDate = LocalDate.of(2021, 7, 31);

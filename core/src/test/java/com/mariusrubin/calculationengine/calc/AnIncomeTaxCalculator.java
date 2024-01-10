@@ -47,7 +47,7 @@ public class AnIncomeTaxCalculator {
 
     final var bRACalc = new DefaultBasicRateAdjustmentCalc(ZERO, ZERO, ZERO);
 
-    final var taxes = underTest.calculate(FY22_23, List.of(inc1), paCalc, bRACalc);
+    final var taxes = underTest.calculate(FY22_23, List.of(inc1), paCalc, bRACalc, ZERO);
 
     //Income tax should be
     //(income - personal allowance) * 0.2
@@ -70,7 +70,7 @@ public class AnIncomeTaxCalculator {
 
     final var bRACalc = new DefaultBasicRateAdjustmentCalc(ZERO, ZERO, ZERO);
 
-    final var taxes = underTest.calculate(FY22_23, List.of(inc1, inc2), paCalc, bRACalc);
+    final var taxes = underTest.calculate(FY22_23, List.of(inc1, inc2), paCalc, bRACalc, ZERO);
 
     //Income tax should be
     //(income - personal allowance) * 0.2, with a £1000 reduction for savings allowance at basic
@@ -96,7 +96,6 @@ public class AnIncomeTaxCalculator {
     Savings allowance takes account of the highest band only.
     Nil adjustment is spread across available tax.
      */
-
     final var inc1 = new KnownEmploymentIncome();
     inc1.setAmount(new BigDecimal("50000.00"));
 
@@ -109,7 +108,7 @@ public class AnIncomeTaxCalculator {
 
     final var bRACalc = new DefaultBasicRateAdjustmentCalc(ZERO, ZERO, ZERO);
 
-    final var taxes = underTest.calculate(FY22_23, List.of(inc1, inc2), paCalc, bRACalc);
+    final var taxes = underTest.calculate(FY22_23, List.of(inc1, inc2), paCalc, bRACalc, ZERO);
 
     //Employment income tax should be
     //(income - personal allowance) * 0.2 (it all falls within basic).
@@ -117,16 +116,18 @@ public class AnIncomeTaxCalculator {
     assertThat(taxes.taxOn(EMPLOYMENT, BASIC).amount()).isEqualTo("37430.00");
 
     //Interest income tax should be
-    //£331 at higher, all of which consumed by allowance
-    //£270 at basic, of which £169 is consumed by allowance, and the remaining £101 taxed
-    assertThat(taxes.taxOn(INTEREST, BASIC).tax()).isEqualTo("20.20");
-    assertThat(taxes.taxOn(INTEREST, BASIC).amount()).isEqualTo("101.00");
+    //£0 at basic as all of it is consumed by allowance
+    //A further £230 consumed at higher nil, and then the last £101 taxed at higher.
+    assertThat(taxes.taxOn(INTEREST, BASIC).tax()).isEqualTo("0.00");
+    assertThat(taxes.taxOn(INTEREST, BASIC).amount()).isEqualTo("0.00");
     assertThat(taxes.taxOn(INTEREST, BASIC_NIL).tax()).isEqualTo("0.00");
-    assertThat(taxes.taxOn(INTEREST, BASIC_NIL).amount()).isEqualTo("169.00");
+    assertThat(taxes.taxOn(INTEREST, BASIC_NIL).amount()).isEqualTo("270.00");
+    assertThat(taxes.taxOn(INTEREST, HIGHER).tax()).isEqualTo("40.40");
+    assertThat(taxes.taxOn(INTEREST, HIGHER).amount()).isEqualTo("101.00");
     assertThat(taxes.taxOn(INTEREST, HIGHER_NIL).tax()).isEqualTo("0.00");
-    assertThat(taxes.taxOn(INTEREST, HIGHER_NIL).amount()).isEqualTo("331.00");
+    assertThat(taxes.taxOn(INTEREST, HIGHER_NIL).amount()).isEqualTo("230.00");
 
-    assertThat(taxes.total().tax()).isEqualTo("7506.20");
+    assertThat(taxes.total().tax()).isEqualTo("7526.40");
     assertThat(taxes.total().amount()).isEqualTo("38031.00");
 
   }
@@ -146,7 +147,7 @@ public class AnIncomeTaxCalculator {
 
     final var bRACalc = new DefaultBasicRateAdjustmentCalc(ZERO, ZERO, ZERO);
 
-    final var taxes = underTest.calculate(FY22_23, List.of(inc1, inc2), paCalc, bRACalc);
+    final var taxes = underTest.calculate(FY22_23, List.of(inc1, inc2), paCalc, bRACalc, ZERO);
 
     //Employment income tax should be
     //Consume all of basic (minus personal allowance)
@@ -187,7 +188,7 @@ public class AnIncomeTaxCalculator {
 
     final var bRACalc = new DefaultBasicRateAdjustmentCalc(ZERO, ZERO, ZERO);
 
-    final var taxes = underTest.calculate(FY22_23, List.of(inc1, inc2, inc3), paCalc, bRACalc);
+    final var taxes = underTest.calculate(FY22_23, List.of(inc1, inc2, inc3), paCalc, bRACalc, ZERO);
 
     //Employment income tax should be
     //(income - personal allowance) * 0.2 (it all falls within basic).
@@ -195,14 +196,16 @@ public class AnIncomeTaxCalculator {
     assertThat(taxes.taxOn(EMPLOYMENT, BASIC).amount()).isEqualTo("37430.00");
 
     //Interest income tax should be
-    //£331 at higher, all of which consumed by allowance
-    //£270 at basic, of which £169 is consumed by allowance, and the remaining £101 taxed
-    assertThat(taxes.taxOn(INTEREST, BASIC).tax()).isEqualTo("20.20");
-    assertThat(taxes.taxOn(INTEREST, BASIC).amount()).isEqualTo("101.00");
+    //£0 at basic as all of it is consumed by allowance
+    //A further £230 consumed at higher nil, and then the last £101 taxed at higher.
+    assertThat(taxes.taxOn(INTEREST, BASIC).tax()).isEqualTo("0.00");
+    assertThat(taxes.taxOn(INTEREST, BASIC).amount()).isEqualTo("0.00");
     assertThat(taxes.taxOn(INTEREST, BASIC_NIL).tax()).isEqualTo("0.00");
-    assertThat(taxes.taxOn(INTEREST, BASIC_NIL).amount()).isEqualTo("169.00");
+    assertThat(taxes.taxOn(INTEREST, BASIC_NIL).amount()).isEqualTo("270.00");
+    assertThat(taxes.taxOn(INTEREST, HIGHER).tax()).isEqualTo("40.40");
+    assertThat(taxes.taxOn(INTEREST, HIGHER).amount()).isEqualTo("101.00");
     assertThat(taxes.taxOn(INTEREST, HIGHER_NIL).tax()).isEqualTo("0.00");
-    assertThat(taxes.taxOn(INTEREST, HIGHER_NIL).amount()).isEqualTo("331.00");
+    assertThat(taxes.taxOn(INTEREST, HIGHER_NIL).amount()).isEqualTo("230.00");
 
     //Dividend income tax should be
     //£2500 at higher, of which £2000 is consumed by allowance
@@ -211,7 +214,7 @@ public class AnIncomeTaxCalculator {
     assertThat(taxes.taxOn(DIVIDENDS, HIGHER).tax()).isEqualTo("168.75");
     assertThat(taxes.taxOn(DIVIDENDS, HIGHER).amount()).isEqualTo("500.00");
 
-    assertThat(taxes.total().tax()).isEqualTo("7674.95");
+    assertThat(taxes.total().tax()).isEqualTo("7695.15");
     assertThat(taxes.total().amount()).isEqualTo("40531.00");
 
   }

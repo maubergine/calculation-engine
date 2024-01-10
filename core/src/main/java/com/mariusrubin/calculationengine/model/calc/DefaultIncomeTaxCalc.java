@@ -20,10 +20,14 @@ public class DefaultIncomeTaxCalc implements IncomeTaxCalc {
 
   private final Collection<TaxedAmount> taxes;
   private final BigDecimal              basicRateLimit;
+  private final BigDecimal              allowanceApplied;
 
-  public DefaultIncomeTaxCalc(final Collection<TaxedAmount> taxes, final BigDecimal basicRateLimit) {
+  public DefaultIncomeTaxCalc(final Collection<TaxedAmount> taxes,
+                              final BigDecimal basicRateLimit,
+                              final BigDecimal allowanceApplied) {
     this.taxes = Collections.unmodifiableCollection(taxes);
     this.basicRateLimit = basicRateLimit;
+    this.allowanceApplied = allowanceApplied;
   }
 
   @Override
@@ -62,6 +66,11 @@ public class DefaultIncomeTaxCalc implements IncomeTaxCalc {
                       .filter(tax -> !check.contains(tax.incomeType()))
                       .reduce(CombinedTaxedAmount::new)
                       .orElse(new DefaultTaxedAmount(ZERO, ZERO, TOTAL, Rate.zero()));
+  }
+
+  @Override
+  public BigDecimal allowanceApplied() {
+    return allowanceApplied;
   }
 
   @Override
@@ -109,10 +118,10 @@ public class DefaultIncomeTaxCalc implements IncomeTaxCalc {
       private final BigDecimal rate;
 
       InferredRate(final BigDecimal amount, final BigDecimal tax) {
-        this.rate = equal(tax, ZERO)
-                    ? new BigDecimal("0.0000")
-                    : tax.setScale(4, RoundingMode.UNNECESSARY)
-                         .divide(amount, RoundingMode.HALF_UP);
+        rate = equal(tax, ZERO)
+               ? new BigDecimal("0.0000")
+               : tax.setScale(4, RoundingMode.UNNECESSARY)
+                    .divide(amount, RoundingMode.HALF_UP);
       }
 
       @Override

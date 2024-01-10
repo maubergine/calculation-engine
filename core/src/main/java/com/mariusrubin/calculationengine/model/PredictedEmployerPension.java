@@ -20,7 +20,7 @@ public class PredictedEmployerPension implements Pension {
 
   //TODO link more explicitly to income
   //in other words, find a tidy way of linking this pension amount to employment income declared
-  //elsewhere in the input information, rather than having duplicate the pay in this object
+  //elsewhere in the input information, rather than having to duplicate the pay in this object
 
   @NotNull
   @DecimalMin("0")

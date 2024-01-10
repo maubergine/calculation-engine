@@ -81,4 +81,10 @@ public interface IncomeTaxCalc {
    */
   BigDecimal basicRateLimit();
 
+  /**
+   * Total allowance applied i.e. the amount by which income is treated as reduced by a combination
+   * of personal allowance and contribution to annuities etc.
+   */
+  BigDecimal allowanceApplied();
+
 }

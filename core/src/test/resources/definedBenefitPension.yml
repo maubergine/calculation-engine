@@ -1,0 +1,13 @@
+---
+
+knownEmployments:
+  - amount: 121000.48
+
+knownPensions:
+  - amount: 1010.20
+    type: DEFINED_BENEFIT
+
+definedLumpPensions:
+  - amount: 12102.24
+    costPerHundredYearlyPay: 744.00
+

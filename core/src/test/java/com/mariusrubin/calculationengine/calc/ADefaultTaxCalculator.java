@@ -5,13 +5,13 @@ import static com.mariusrubin.calculationengine.UkTaxRates.FY18_19;
 import static com.mariusrubin.calculationengine.UkTaxRates.FY19_20;
 import static com.mariusrubin.calculationengine.UkTaxRates.FY20_21;
 import static com.mariusrubin.calculationengine.UkTaxRates.FY21_22;
+import static com.mariusrubin.calculationengine.UkTaxRates.FY22_23;
 import static com.mariusrubin.calculationengine.UkTaxRates.FY23_24;
 import static com.mariusrubin.calculationengine.api.IncomeType.DIVIDENDS;
 import static com.mariusrubin.calculationengine.api.IncomeType.EMPLOYMENT;
 import static com.mariusrubin.calculationengine.api.IncomeType.INTEREST;
 import static com.mariusrubin.calculationengine.api.IncomeType.PENSION_CHARGE;
 import static com.mariusrubin.calculationengine.api.RateLevel.ADDITIONAL;
-import static com.mariusrubin.calculationengine.api.RateLevel.ADDITIONAL_NIL;
 import static com.mariusrubin.calculationengine.api.RateLevel.BASIC;
 import static com.mariusrubin.calculationengine.api.RateLevel.BASIC_NIL;
 import static com.mariusrubin.calculationengine.api.RateLevel.HIGHER;
@@ -166,20 +166,17 @@ public class ADefaultTaxCalculator {
     assertThat(result.incomeTax().taxOn(DIVIDENDS, BASIC).amount()).isEqualTo("0.00");
     assertThat(result.incomeTax().taxOn(DIVIDENDS, BASIC).tax()).isEqualTo("0.00");
 
-    assertThat(result.incomeTax().taxOn(DIVIDENDS, HIGHER_NIL).amount()).isEqualTo("0.00");
+    assertThat(result.incomeTax().taxOn(DIVIDENDS, HIGHER_NIL).amount()).isEqualTo("2000.00");
     assertThat(result.incomeTax().taxOn(DIVIDENDS, HIGHER_NIL).tax()).isEqualTo("0.00");
 
-    assertThat(result.incomeTax().taxOn(DIVIDENDS, HIGHER).amount()).isEqualTo("27187.00");
-    assertThat(result.incomeTax().taxOn(DIVIDENDS, HIGHER).tax()).isEqualTo("8835.77");
+    assertThat(result.incomeTax().taxOn(DIVIDENDS, HIGHER).amount()).isEqualTo("25187.00");
+    assertThat(result.incomeTax().taxOn(DIVIDENDS, HIGHER).tax()).isEqualTo("8185.77");
 
-    assertThat(result.incomeTax().taxOn(DIVIDENDS, ADDITIONAL_NIL).amount()).isEqualTo("2000.00");
-    assertThat(result.incomeTax().taxOn(DIVIDENDS, ADDITIONAL_NIL).tax()).isEqualTo("0.00");
-
-    assertThat(result.incomeTax().taxOn(DIVIDENDS, ADDITIONAL).amount()).isEqualTo("194313.00");
-    assertThat(result.incomeTax().taxOn(DIVIDENDS, ADDITIONAL).tax()).isEqualTo("74033.25");
+    assertThat(result.incomeTax().taxOn(DIVIDENDS, ADDITIONAL).amount()).isEqualTo("196313.00");
+    assertThat(result.incomeTax().taxOn(DIVIDENDS, ADDITIONAL).tax()).isEqualTo("74795.25");
 
     assertThat(result.incomeTax().total().amount()).isEqualTo("346313.00");
-    assertThat(result.incomeTax().total().tax()).isEqualTo("124494.22");
+    assertThat(result.incomeTax().total().tax()).isEqualTo("124606.22");
 
   }
 
@@ -229,34 +226,34 @@ public class ADefaultTaxCalculator {
     assertThat(result.incomeTax().taxOn(INTEREST, ADDITIONAL).amount()).isEqualTo("0.00");
     assertThat(result.incomeTax().taxOn(INTEREST, ADDITIONAL).tax()).isEqualTo("0.00");
 
-    assertThat(result.incomeTax().taxOn(DIVIDENDS, BASIC).amount()).isEqualTo("17576.00");
-    assertThat(result.incomeTax().taxOn(DIVIDENDS, BASIC).tax()).isEqualTo("1318.20");
+    assertThat(result.incomeTax().taxOn(DIVIDENDS, BASIC_NIL).amount()).isEqualTo("2000.00");
+    assertThat(result.incomeTax().taxOn(DIVIDENDS, BASIC_NIL).tax()).isEqualTo("0.00");
 
-    assertThat(result.incomeTax().taxOn(DIVIDENDS, HIGHER_NIL).amount()).isEqualTo("2000.00");
-    assertThat(result.incomeTax().taxOn(DIVIDENDS, HIGHER_NIL).tax()).isEqualTo("0.00");
+    assertThat(result.incomeTax().taxOn(DIVIDENDS, BASIC).amount()).isEqualTo("15576.00");
+    assertThat(result.incomeTax().taxOn(DIVIDENDS, BASIC).tax()).isEqualTo("1168.20");
 
-    assertThat(result.incomeTax().taxOn(DIVIDENDS, HIGHER).amount()).isEqualTo("5547.00");
-    assertThat(result.incomeTax().taxOn(DIVIDENDS, HIGHER).tax()).isEqualTo("1802.77");
+    assertThat(result.incomeTax().taxOn(DIVIDENDS, HIGHER).amount()).isEqualTo("7547.00");
+    assertThat(result.incomeTax().taxOn(DIVIDENDS, HIGHER).tax()).isEqualTo("2452.77");
 
     assertThat(result.incomeTax().taxOn(DIVIDENDS, ADDITIONAL).amount()).isEqualTo("0.00");
     assertThat(result.incomeTax().taxOn(DIVIDENDS, ADDITIONAL).tax()).isEqualTo("0.00");
 
     assertThat(result.incomeTax().total().amount()).isEqualTo("45247.00");
-    assertThat(result.incomeTax().total().tax()).isEqualTo("7045.77");
+    assertThat(result.incomeTax().total().tax()).isEqualTo("7545.77");
 
     final var expectedJanDate = LocalDate.of(2023, 1, 31);
     final var expectedJulDate = LocalDate.of(2023, 7, 31);
 
-    assertThat(result.paymentDue().totalPaymentsOnAccount()).isEqualTo("2363.57");
-    assertThat(result.paymentDue().incomeTaxAsPercentage()).isEqualTo("0.6645");
+    assertThat(result.paymentDue().totalPaymentsOnAccount()).isEqualTo("2863.57");
+    assertThat(result.paymentDue().incomeTaxAsPercentage()).isEqualTo("0.6205");
     assertThat(result.paymentDue().paymentsOnAccountDue()).isTrue();
-    assertThat(result.paymentDue().balance().amount()).isEqualTo("1133.02");
+    assertThat(result.paymentDue().balance().amount()).isEqualTo("1633.02");
     assertThat(result.paymentDue().balance().date()).isEqualTo(expectedJanDate);
-    assertThat(result.paymentDue().firstPayment().amount()).isEqualTo("1181.78");
+    assertThat(result.paymentDue().firstPayment().amount()).isEqualTo("1431.78");
     assertThat(result.paymentDue().firstPayment().date()).isEqualTo(expectedJanDate);
-    assertThat(result.paymentDue().secondPayment().amount()).isEqualTo("1181.79");
+    assertThat(result.paymentDue().secondPayment().amount()).isEqualTo("1431.79");
     assertThat(result.paymentDue().secondPayment().date()).isEqualTo(expectedJulDate);
-    assertThat(result.paymentDue().januaryTotal().amount()).isEqualTo("2314.80");
+    assertThat(result.paymentDue().januaryTotal().amount()).isEqualTo("3064.80");
     assertThat(result.paymentDue().januaryTotal().date()).isEqualTo(expectedJanDate);
   }
 
@@ -298,5 +295,38 @@ public class ADefaultTaxCalculator {
 
   }
 
+  @Test
+  public void shouldHandleDefinedBenefitContribsIncludingWhereOverAllowance() {
+
+    final var loader = new YamlFileLoader(
+        "src/test/resources/definedBenefitPension.yml");
+
+    final var taxPayer = loader.taxPayer();
+
+    final var result = new DefaultTaxCalculator(FY22_23).calculate(taxPayer);
+
+    CalcPrinter.print(result);
+
+    assertThat(result.income().totalEmploymentPay()).isEqualTo("121000.00");
+    assertThat(result.income().totalFromAllEmployments()).isEqualTo("121000.00");
+    assertThat(result.income().netIncome()).isEqualTo("121000.00");
+
+    assertThat(result.personalAllowance().allowance()).isEqualTo("8122.00");
+
+    assertThat(result.incomeTax().taxOn(EMPLOYMENT, BASIC).amount()).isEqualTo("37700.00");
+    assertThat(result.incomeTax().taxOn(EMPLOYMENT, BASIC).tax()).isEqualTo("7540.00");
+
+    assertThat(result.incomeTax().taxOn(EMPLOYMENT, HIGHER).amount()).isEqualTo("63075.00");
+    assertThat(result.incomeTax().taxOn(EMPLOYMENT, HIGHER).tax()).isEqualTo("25230.00");
+
+    assertThat(result.incomeTax().taxOn(EMPLOYMENT, ADDITIONAL).amount()).isEqualTo("0.00");
+    assertThat(result.incomeTax().taxOn(EMPLOYMENT, ADDITIONAL).tax()).isEqualTo("0.00");
+
+    assertThat(result.incomeTax().taxOn(PENSION_CHARGE, HIGHER).amount()).isEqualTo("2189.00");
+    assertThat(result.incomeTax().taxOn(PENSION_CHARGE, HIGHER).tax()).isEqualTo("875.60");
+
+    assertThat(result.pension().contributionsToRars()).isEqualTo("12103.00");
+
+  }
 
 }

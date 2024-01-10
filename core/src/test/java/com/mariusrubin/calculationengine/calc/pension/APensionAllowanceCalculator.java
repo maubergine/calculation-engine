@@ -28,14 +28,16 @@ public class APensionAllowanceCalculator {
         new BigDecimal("50000.00"),
         new BigDecimal("55000.00"),
         new BigDecimal("0.00"),
-        new BigDecimal("41000.00")
+        new BigDecimal("41000.00"),
+        new BigDecimal("0.00")
     );
 
     assertThat(underTest.calculate(FY22_23,
                                    new BigDecimal("45000.00"),
                                    new BigDecimal("50000.00"),
                                    new BigDecimal("55000.00"),
-                                   new BigDecimal("1000.00"))).isEqualTo(expected);
+                                   new BigDecimal("1000.00"),
+                                   new BigDecimal("0.00"))).isEqualTo(expected);
 
   }
 
@@ -48,14 +50,16 @@ public class APensionAllowanceCalculator {
         new BigDecimal("30000.00"),
         new BigDecimal("33000.00"),
         ZERO,
-        new BigDecimal("27000.00")
+        new BigDecimal("27000.00"),
+        new BigDecimal("0.00")
     );
 
     assertThat(underTest.calculate(FY22_23,
                                    new BigDecimal("27000.00"),
                                    new BigDecimal("30000.00"),
                                    new BigDecimal("33000.00"),
-                                   new BigDecimal("1000.00"))).isEqualTo(expected);
+                                   new BigDecimal("1000.00"),
+                                   new BigDecimal("0.00"))).isEqualTo(expected);
 
   }
 
@@ -68,14 +72,16 @@ public class APensionAllowanceCalculator {
         new BigDecimal("2500.00"),
         new BigDecimal("2500.00"),
         ZERO,
-        new BigDecimal("3600.00")
+        new BigDecimal("3600.00"),
+        new BigDecimal("0.00")
     );
 
     assertThat(underTest.calculate(FY23_24,
                                    new BigDecimal("2500.00"),
                                    new BigDecimal("2500.00"),
                                    new BigDecimal("2500.00"),
-                                   ZERO)).isEqualTo(expected);
+                                   ZERO,
+                                   new BigDecimal("0.00"))).isEqualTo(expected);
 
   }
 
@@ -88,14 +94,16 @@ public class APensionAllowanceCalculator {
         new BigDecimal("198000.00"),
         new BigDecimal("270000.00"),
         ZERO,
-        new BigDecimal("40000.00")
+        new BigDecimal("40000.00"),
+        new BigDecimal("0.00")
     );
 
     assertThat(underTest.calculate(FY22_23,
                                    new BigDecimal("180000.00"),
                                    new BigDecimal("198000.00"),
                                    new BigDecimal("270000.00"),
-                                   ZERO)).isEqualTo(expected);
+                                   ZERO,
+                                   new BigDecimal("0.00"))).isEqualTo(expected);
 
   }
 
@@ -108,14 +116,16 @@ public class APensionAllowanceCalculator {
         new BigDecimal("209000.00"),
         new BigDecimal("270000.00"),
         new BigDecimal("15000.00"),
-        new BigDecimal("25000.00")
+        new BigDecimal("25000.00"),
+        new BigDecimal("0.00")
     );
 
     assertThat(underTest.calculate(FY22_23,
                                    new BigDecimal("190000.00"),
                                    new BigDecimal("209000.00"),
                                    new BigDecimal("270000.00"),
-                                   ZERO)).isEqualTo(expected);
+                                   ZERO,
+                                   new BigDecimal("0.00"))).isEqualTo(expected);
 
   }
 
@@ -128,14 +138,38 @@ public class APensionAllowanceCalculator {
         new BigDecimal("209000.00"),
         new BigDecimal("350000.00"),
         new BigDecimal("36000.00"),
-        new BigDecimal("5000.00")
+        new BigDecimal("5000.00"),
+        new BigDecimal("0.00")
     );
 
     assertThat(underTest.calculate(FY22_23,
                                    new BigDecimal("190000.00"),
                                    new BigDecimal("209000.00"),
                                    new BigDecimal("350000.00"),
-                                   new BigDecimal("1000.00"))).isEqualTo(expected);
+                                   new BigDecimal("1000.00"),
+                                   new BigDecimal("0.00"))).isEqualTo(expected);
+
+  }
+
+  @Test
+  public void shouldPassThroughContributionsToRarsDoneByTheCalculatorFor() {
+
+    final var expected = new DefaultPensionCalc(
+        new BigDecimal("40000.00"),
+        new BigDecimal("50000.00"),
+        new BigDecimal("50000.00"),
+        new BigDecimal("60000.00"),
+        new BigDecimal("0.00"),
+        new BigDecimal("40000.00"),
+        new BigDecimal("2001.00")
+    );
+
+    assertThat(underTest.calculate(FY22_23,
+                                   new BigDecimal("50000.00"),
+                                   new BigDecimal("50000.00"),
+                                   new BigDecimal("60000.00"),
+                                   new BigDecimal("0.00"),
+                                   new BigDecimal("2001.00"))).isEqualTo(expected);
 
   }
 
