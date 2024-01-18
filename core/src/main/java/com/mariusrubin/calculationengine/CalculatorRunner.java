@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.concurrent.Callable;
 import picocli.CommandLine;
+import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
@@ -18,6 +19,7 @@ import picocli.CommandLine.Parameters;
  * @author Marius Rubin
  * @since 0.1.0
  */
+@Command(name = "calculation-engine-core")
 public class CalculatorRunner implements Callable<Integer> {
 
   private static final String YAML_EXTENSION = "yml";
@@ -35,14 +37,27 @@ public class CalculatorRunner implements Callable<Integer> {
           description = "The tax year you want to use to run the numbers, default: ${DEFAULT-VALUE}")
   private UkTaxRates rate = UkTaxRates.current();
 
+  @Option(names = {"-h", "--help"}, usageHelp = true, description = "Display this help message")
+  boolean usageHelpRequested;
+
 
   public static void main(String[] args) throws IOException {
+
+    final var runner = CommandLine.populateCommand(new CalculatorRunner(), args);
+
+    if(runner.usageHelpRequested) {
+      CommandLine.usage(runner, System.out);
+      System.exit(0);
+    }
+
     final int exitCode = new CommandLine(new CalculatorRunner()).execute(args);
+
     System.exit(exitCode);
   }
 
   @Override
   public Integer call() throws Exception {
+
     final var calculator = new DefaultTaxCalculator(rate);
 
     try (final var files = Files.walk(scenarioDir).sequential();
