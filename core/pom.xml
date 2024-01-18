@@ -18,10 +18,11 @@
         <assertj-core.version>3.25.1</assertj-core.version>
         <junit-jupiter-api.version>5.10.1</junit-jupiter-api.version>
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
-        <maven.compiler.source>${java.specification.version}</maven.compiler.source>
-        <maven.compiler.target>${java.specification.version}</maven.compiler.target>
+        <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
         <maven-shade-plugin.version>3.5.1</maven-shade-plugin.version>
         <native-maven-plugin.version>0.9.28</native-maven-plugin.version>
+        <maven.compiler.source>${java.specification.version}</maven.compiler.source>
+        <maven.compiler.target>${java.specification.version}</maven.compiler.target>
     </properties>
     <dependencies>
         <dependency>
@@ -61,6 +62,20 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>info.picocli</groupId>
+                            <artifactId>picocli-codegen</artifactId>
+                            <version>${picocli.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -120,7 +135,7 @@
                         </executions>
                         <configuration>
                             <buildArgs>
-                                <arg>-H:ReflectionConfigurationFiles=${project.basedir}/META-INF/native-image/reflect-config.json</arg>
+                                <arg>-H:ReflectionConfigurationFiles=${project.basedir}/META-INF/native-image/reflect-config.json,${project.build.directory}/classes/META-INF/native-image/picocli-generated/reflect-config.json</arg>
                             </buildArgs>
                         </configuration>
                     </plugin>
