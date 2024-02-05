@@ -16,7 +16,7 @@
         <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
         <picocli.version>4.7.5</picocli.version>
         <assertj-core.version>3.25.3</assertj-core.version>
-        <junit-jupiter-api.version>5.10.1</junit-jupiter-api.version>
+        <junit-jupiter-api.version>5.10.2</junit-jupiter-api.version>
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
         <maven-shade-plugin.version>3.5.1</maven-shade-plugin.version>
