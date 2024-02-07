@@ -4,18 +4,20 @@
 # an income
 
 predictedEmployments:
-  - base: 45648
-    holidayDays: 5
-    knownBonus: 1000
-    payrollGiving: 1500
-    benefits:
+  # For capturing amounts you are predicted to earn as opposed to where the exact amounts are known.
+  - base: 45648 # your base pay
+    holidayDays: 5 # additional holiday days bought (positive) or sold (negative).
+    knownBonus: 1000 # The amount you expect to receive in bonus. This overrides your...
+    predictedBonus: 0.05 # The percentage (applied against base) that is used to form your bonus.
+    payrollGiving: 1500 # Any amounts given to charity through a GAYE-type scheme (i.e. before tax).
+    benefits: # Record the value of any taxable benefits here.
       - amount: 455.00
 
 
 knownEmployments:
   #   Amount should be the same as your P60 income.
   - amount: 4456.48
-    #   For each taxable benefit add a line as per the below format.
+    #   For each taxable benefit add a line as per the below format. Your yearly P11D has details.
     benefits:
       - amount: 44.00
     #   For each tax-deductible expense add an amount line as per the below format.
@@ -30,7 +32,8 @@ dividends:
 # This is for pension contributions. You can enter a type/amount pair for each one.
 knownPensions:
   # Example for where your employer has contributed (note if you have a salary sacrifice arrangement
-  # this would be included in here).
+  # where the amount is known this would manifest as employer pension. Supported types are:
+  #  DEFINED_BENEFIT, EMPLOYER, RAR and SIPP.
   - type: EMPLOYER
     amount: 4554
 
@@ -42,8 +45,7 @@ definedLumpPensions:
 
 # This is for pension contributions that come from a predicted percentage of salary.
 predictedPensions:
-  # Example for where your employer has contributed (note if you have a salary sacrifice arrangement
-  # this would be included in here).
+  # This example shows how you would describe a salary sacrifice against a known income.
   - income: 40000.00 #i.e. the salary amount the percentage acts against
     percentage: 0.09
 
