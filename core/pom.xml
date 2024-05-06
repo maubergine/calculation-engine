@@ -12,7 +12,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <hibernate-validator.version>8.0.1.Final</hibernate-validator.version>
-        <jackson-dataformat-yaml.version>2.17.0</jackson-dataformat-yaml.version>
+        <jackson-dataformat-yaml.version>2.17.1</jackson-dataformat-yaml.version>
         <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
         <picocli.version>4.7.5</picocli.version>
         <assertj-core.version>3.25.3</assertj-core.version>
