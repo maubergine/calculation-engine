@@ -17,7 +17,7 @@
         <picocli.version>4.7.6</picocli.version>
         <assertj-core.version>3.26.3</assertj-core.version>
         <junit-jupiter-api.version>5.10.3</junit-jupiter-api.version>
-        <maven-surefire-plugin.version>3.4.0</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.5.1</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-shade-plugin.version>3.6.0</maven-shade-plugin.version>
         <native-maven-plugin.version>0.10.2</native-maven-plugin.version>
