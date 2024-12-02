@@ -144,7 +144,11 @@
                         </executions>
                         <configuration>
                             <buildArgs>
+                                <arg>-H:+UnlockExperimentalVMOptions</arg>
                                 <arg>-H:ReflectionConfigurationFiles=${project.basedir}/META-INF/native-image/reflect-config.json,${project.build.directory}/classes/META-INF/native-image/picocli-generated/reflect-config.json</arg>
+                                <arg>--strict-image-heap</arg>
+                                <arg>-R:MaxHeapSize=2g</arg>
+                                <arg>-march=native</arg>
                             </buildArgs>
                         </configuration>
                     </plugin>
