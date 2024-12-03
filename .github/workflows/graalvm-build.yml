@@ -4,11 +4,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: graalvm/setup-graalvm@v1
         with:
-          java-version: '17.0.7'
+          java-version: '21'
           distribution: 'graalvm-community' # See 'Options' for all available distributions
+          version: 21.0.2
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Check GraalVM installed
         run: |
