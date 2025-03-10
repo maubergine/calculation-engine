@@ -185,4 +185,36 @@ public class APaymentDueCalculator {
 
   }
 
+  @Test
+  public void shouldHandleCircumstancesWhereNoTaxIsDue() {
+
+    final var tax1 = new DefaultTaxedAmount(new BigDecimal("10000.00"),
+                                            new BigDecimal("0.00"),
+                                            IncomeType.EMPLOYMENT,
+                                            new DefaultRate(BASIC, new BigDecimal("0.2")));
+
+    final var itc = new DefaultIncomeTaxCalc(List.of(tax1), BigDecimal.ZERO, BigDecimal.ZERO);
+
+    final var janDate  = LocalDate.of(2021, 1, 31);
+    final var julyDate = LocalDate.of(2021, 7, 31);
+
+    final var expected = new DefaultPaymentDueCalc(
+        new BigDecimal("0.00"),
+        new BigDecimal("0.00"),
+        new BigDecimal("0.0000"),
+        false,
+        new DefaultPaymentInstance(ZERO, janDate),
+        new DefaultPaymentInstance(ZERO, janDate),
+        new DefaultPaymentInstance(ZERO, julyDate),
+        new DefaultPaymentInstance(ZERO, janDate),
+        ZERO);
+
+    //We are overriding the amount of tax paid to be below the PoA threshold
+    assertThat(underTest.calculate(itc,
+                                   ZERO,
+                                   null,
+                                   UkFinancialYear.starting(2019))).isEqualTo(expected);
+
+  }
+
 }
