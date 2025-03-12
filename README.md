@@ -35,6 +35,14 @@ Repository Layout
 Contains engine code and model. This is in its own module rather than at the project root so that 
 it is easier in future to build out web/service layers.
 
+### `web` ###
+Contains a Spring Boot web application that provides a user interface for the calculation engine.
+
+#### Running the Web Application
+1. Build the project using maven `./mvnw clean package`
+2. Run the web application using `java -jar web/target/calculation-web-*.jar`
+3. Open `http://localhost:8080` in your browser to access the tax calculator
+
 
 Contributing
 ------------
