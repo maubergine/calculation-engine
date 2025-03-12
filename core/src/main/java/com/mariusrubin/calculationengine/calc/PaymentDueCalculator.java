@@ -1,6 +1,11 @@
 package com.mariusrubin.calculationengine.calc;
 
 import static com.mariusrubin.calculationengine.api.IncomeType.EMPLOYMENT;
+import static com.mariusrubin.calculationengine.util.TaxMathUtils.ZERO;
+import static com.mariusrubin.calculationengine.util.TaxMathUtils.greaterThan;
+import static com.mariusrubin.calculationengine.util.TaxMathUtils.lessThanOrEqual;
+import static java.math.RoundingMode.HALF_UP;
+import static java.math.RoundingMode.UNNECESSARY;
 
 import com.mariusrubin.calculationengine.FinancialYear;
 import com.mariusrubin.calculationengine.api.calc.IncomeTaxCalc;
@@ -47,11 +52,17 @@ public class PaymentDueCalculator {
 
     final var totalTax = itc.total().tax();
 
-    final var incomeAsPercentage = presumedTaxPaid
-        .setScale(4, RoundingMode.UNNECESSARY)
-        .divide(itc.total().tax(), RoundingMode.HALF_UP);
+    final BigDecimal incomeAsPercentage;
+    final boolean    poaDue;
 
-    final var poaDue = TaxMathUtils.lessThanOrEqual(incomeAsPercentage, POA_PERCENT_THRESHOLD);
+    if (greaterThan(presumedTaxPaid, ZERO)) {
+      incomeAsPercentage = presumedTaxPaid.setScale(4, RoundingMode.UNNECESSARY)
+                                          .divide(itc.total().tax(), HALF_UP);
+      poaDue = lessThanOrEqual(incomeAsPercentage, POA_PERCENT_THRESHOLD);
+    } else {
+      incomeAsPercentage = ZERO.setScale(4, UNNECESSARY);
+      poaDue = false;
+    }
 
     final var balance = totalTax.subtract(presumedTaxPaid).subtract(paymentsMade);
 
