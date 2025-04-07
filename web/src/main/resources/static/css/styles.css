@@ -1,9 +1,23 @@
+/* Import font styles */
+@import url('fonts.css');
+@import url('css2.css');
+
 /* Global Styles */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Lato', sans-serif;
   line-height: 1.6;
   color: #333;
   background-color: #f8f9fa;
+}
+
+h1, h2, h3, h4, h5, .navbar-brand {
+  font-family: 'Tiempos Headline', serif;
+  font-weight: 500;
+}
+
+.lead {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
 }
 
 /* Card and Container Styles */
@@ -20,6 +34,13 @@ body {
 
 .card-header {
   border-radius: 0.5rem 0.5rem 0 0 !important;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+}
+
+.card-title {
+  font-family: 'Tiempos Headline', serif;
+  font-weight: 500;
 }
 
 .shadow {
@@ -31,6 +52,11 @@ body {
   border-radius: 0.25rem;
   border: 1px solid #ced4da;
   padding: 0.5rem 0.75rem;
+  font-family: 'Lato', sans-serif;
+}
+
+.form-label {
+  font-weight: 700;
 }
 
 .form-control:focus, .form-select:focus {
@@ -42,6 +68,8 @@ body {
   border-radius: 0.25rem;
   padding: 0.5rem 1rem;
   transition: all 0.3s ease-in-out;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
 }
 
 .btn-primary {
@@ -60,7 +88,27 @@ body {
 }
 
 .navbar-brand {
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.nav-link {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+}
+
+/* Text Styles */
+.fw-bold {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700 !important;
+}
+
+.text-primary {
+  color: #0d6efd !important;
+}
+
+.text-danger {
+  color: #dc3545 !important;
 }
 
 /* Footer Styles */

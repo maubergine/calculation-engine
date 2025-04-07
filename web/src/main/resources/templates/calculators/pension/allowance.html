@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pension Annual Allowance Calculator - UK Tax Calculator</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/">UK Tax Calculator</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/calculators">Calculators</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/calculators">Calculators</a></li>
+            <li class="breadcrumb-item">Pension</li>
+            <li class="breadcrumb-item active">Annual Allowance</li>
+          </ol>
+        </nav>
+        
+        <h1 class="mb-4">Pension Annual Allowance Calculator</h1>
+        <p class="lead mb-4">
+          Calculate your pension annual allowance based on your adjusted income and threshold income. This calculator includes tapered allowance calculations for high earners.
+        </p>
+        
+        <div class="card shadow mb-4">
+          <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Enter Your Financial Details</h5>
+          </div>
+          <div class="card-body">
+            <form id="pensionAllowanceForm">
+              <div class="mb-3">
+                <label for="taxYear" class="form-label">Tax Year</label>
+                <select class="form-select" id="taxYear" required>
+                  <option value="" selected disabled>Select Tax Year</option>
+                  <option th:each="year : ${taxYears}" th:value="${year}" th:text="${year}"></option>
+                </select>
+              </div>
+              
+              <div class="mb-3">
+                <label for="adjustedIncome" class="form-label">Adjusted Income (£)</label>
+                <input type="number" class="form-control" id="adjustedIncome" min="0" value="0" step="0.01" required>
+                <div class="form-text">Your income after adding back pension contributions</div>
+              </div>
+              
+              <div class="mb-3">
+                <label for="thresholdIncome" class="form-label">Threshold Income (£)</label>
+                <input type="number" class="form-control" id="thresholdIncome" min="0" value="0" step="0.01" required>
+                <div class="form-text">Your income before pension contributions</div>
+              </div>
+              
+              <button type="submit" class="btn btn-success">Calculate Pension Allowance</button>
+            </form>
+          </div>
+        </div>
+        
+        <div id="resultsCard" class="card shadow" style="display: none;">
+          <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Calculation Results</h5>
+          </div>
+          <div class="card-body">
+            <div class="row mb-3">
+              <div class="col-6">
+                <h6 class="fw-bold">Standard Annual Allowance:</h6>
+              </div>
+              <div class="col-6 text-end">
+                <span id="standardAllowance">£60,000.00</span>
+              </div>
+            </div>
+            
+            <div id="taperingSection" style="display: none;">
+              <div class="row mb-3">
+                <div class="col-6">
+                  <h6 class="fw-bold">Allowance Tapering:</h6>
+                </div>
+                <div class="col-6 text-end">
+                  <span id="taperingAmount" class="text-danger">-£0.00</span>
+                </div>
+              </div>
+            </div>
+            
+            <hr>
+            
+            <div class="row">
+              <div class="col-6">
+                <h5 class="fw-bold">Your Annual Allowance:</h5>
+              </div>
+              <div class="col-6 text-end">
+                <h5 class="fw-bold text-success" id="pensionAllowance">£60,000.00</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card mt-4">
+          <div class="card-header bg-light">
+            <h5 class="mb-0">About Pension Annual Allowance</h5>
+          </div>
+          <div class="card-body">
+            <p>
+              The pension annual allowance is the maximum amount of pension savings you can make each year with tax relief.
+            </p>
+            <h6 class="fw-bold mt-3">Tapering for High Earners</h6>
+            <p>
+              Your annual allowance may be reduced (tapered) if both:
+            </p>
+            <ul>
+              <li>Your 'threshold income' is over £200,000</li>
+              <li>Your 'adjusted income' is over £240,000</li>
+            </ul>
+            <p>
+              For every £2 your adjusted income exceeds £240,000, your annual allowance is reduced by £1, down to a minimum of £10,000.
+            </p>
+            <h6 class="fw-bold mt-3">Key Terms</h6>
+            <ul>
+              <li><strong>Adjusted income</strong>: Your total income plus the value of any employer pension contributions</li>
+              <li><strong>Threshold income</strong>: Your total income minus personal pension contributions</li>
+            </ul>
+            <p class="mb-0 mt-3 small">
+              <em>Note: This calculator provides an estimate based on the information you enter and should not be relied upon for tax filing purposes. Always consult a tax professional for pension advice.</em>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p>&copy; 2025 UK Tax Calculator. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p>Built by Marius Rubin using the Calculation Engine</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Format currency
+    const formatCurrency = (value) => {
+      return '£' + parseFloat(value).toFixed(2);
+    };
+    
+    document.getElementById('pensionAllowanceForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const formData = {
+        taxYear: document.getElementById('taxYear').value,
+        adjustedIncome: document.getElementById('adjustedIncome').value,
+        thresholdIncome: document.getElementById('thresholdIncome').value
+      };
+      
+      // Make API call
+      fetch('/api/calculation/pension/allowance', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Standard allowance (for display purposes)
+        const standardAllowance = 60000;
+        document.getElementById('standardAllowance').textContent = formatCurrency(standardAllowance);
+        
+        // Display results
+        document.getElementById('pensionAllowance').textContent = formatCurrency(data.pensionAllowance);
+        
+        // Check if tapering applies
+        const taperAmount = standardAllowance - parseFloat(data.pensionAllowance);
+        if (taperAmount > 0) {
+          document.getElementById('taperingAmount').textContent = '-' + formatCurrency(taperAmount);
+          document.getElementById('taperingSection').style.display = 'block';
+        } else {
+          document.getElementById('taperingSection').style.display = 'none';
+        }
+        
+        // Show results card
+        document.getElementById('resultsCard').style.display = 'block';
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while calculating your pension allowance. Please try again.');
+      });
+    });
+  </script>
+</body>
+</html>

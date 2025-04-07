@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic Rate Adjustment Calculator - UK Tax Calculator</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/">UK Tax Calculator</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/calculators">Calculators</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/calculators">Calculators</a></li>
+            <li class="breadcrumb-item active">Basic Rate Adjustment</li>
+          </ol>
+        </nav>
+        
+        <h1 class="mb-4">Basic Rate Adjustment Calculator</h1>
+        <p class="lead mb-4">
+          Calculate the basic rate tax adjustment for pension contributions made to relief at source pension schemes.
+        </p>
+        
+        <div class="card shadow mb-4">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Enter Your Pension Contribution</h5>
+          </div>
+          <div class="card-body">
+            <form id="basicRateAdjustmentForm">
+              <div class="mb-3">
+                <label for="taxYear" class="form-label">Tax Year</label>
+                <select class="form-select" id="taxYear" required>
+                  <option value="" selected disabled>Select Tax Year</option>
+                  <option th:each="year : ${taxYears}" th:value="${year}" th:text="${year}"></option>
+                </select>
+              </div>
+              
+              <div class="mb-3">
+                <label for="pensionContribution" class="form-label">Pension Contribution (£)</label>
+                <input type="number" class="form-control" id="pensionContribution" min="0" value="0" step="0.01" required>
+                <div class="form-text">The net amount you've contributed to a relief at source pension scheme</div>
+              </div>
+              
+              <button type="submit" class="btn btn-primary">Calculate Basic Rate Adjustment</button>
+            </form>
+          </div>
+        </div>
+        
+        <div id="resultsCard" class="card shadow" style="display: none;">
+          <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Calculation Results</h5>
+          </div>
+          <div class="card-body">
+            <div class="row mb-3">
+              <div class="col-6">
+                <h6 class="fw-bold">Your Net Contribution:</h6>
+              </div>
+              <div class="col-6 text-end">
+                <span id="netContribution">£0.00</span>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-6">
+                <h6 class="fw-bold">Basic Rate Tax Relief:</h6>
+              </div>
+              <div class="col-6 text-end">
+                <span id="basicRateAdjustment">£0.00</span>
+              </div>
+            </div>
+            
+            <hr>
+            
+            <div class="row">
+              <div class="col-6">
+                <h5 class="fw-bold">Gross Contribution:</h5>
+              </div>
+              <div class="col-6 text-end">
+                <h5 class="fw-bold text-success" id="grossContribution">£0.00</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card mt-4">
+          <div class="card-header bg-light">
+            <h5 class="mb-0">About Basic Rate Adjustment</h5>
+          </div>
+          <div class="card-body">
+            <p>
+              When you contribute to a pension scheme with tax relief at source, you automatically receive basic rate (20%) tax relief on your contributions.
+            </p>
+            <p>
+              This means that for every £80 you contribute, the government adds £20, so that £100 in total goes into your pension.
+            </p>
+            <h6 class="fw-bold mt-3">How It Works</h6>
+            <ul>
+              <li>You make a contribution from your after-tax income</li>
+              <li>Your pension provider automatically claims basic rate tax relief (20%) from the government</li>
+              <li>This basic rate relief is added directly to your pension pot</li>
+              <li>If you're a higher or additional rate taxpayer, you can claim the additional tax relief through your Self Assessment tax return</li>
+            </ul>
+            <p class="mb-0 mt-3 small">
+              <em>Note: This calculator provides an estimate based on the information you enter and should not be relied upon for tax filing purposes. Always consult a tax professional for pension advice.</em>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p>&copy; 2025 UK Tax Calculator. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p>Built by Marius Rubin using the Calculation Engine</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Format currency
+    const formatCurrency = (value) => {
+      return '£' + parseFloat(value).toFixed(2);
+    };
+    
+    document.getElementById('basicRateAdjustmentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const formData = {
+        taxYear: document.getElementById('taxYear').value,
+        pensionContribution: document.getElementById('pensionContribution').value
+      };
+      
+      // Make API call
+      fetch('/api/calculation/basic-rate-adjustment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Display results
+        document.getElementById('netContribution').textContent = formatCurrency(formData.pensionContribution);
+        document.getElementById('basicRateAdjustment').textContent = formatCurrency(data.basicRateAdjustment);
+        
+        // Calculate gross contribution
+        const grossContribution = parseFloat(formData.pensionContribution) + parseFloat(data.basicRateAdjustment);
+        document.getElementById('grossContribution').textContent = formatCurrency(grossContribution);
+        
+        // Show results card
+        document.getElementById('resultsCard').style.display = 'block';
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while calculating the basic rate adjustment. Please try again.');
+      });
+    });
+  </script>
+</body>
+</html>

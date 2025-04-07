@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'Tiempos Headline';
+  src: local('Tiempos Headline'), url('./tiempos/tiempos-headline-web-medium.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tiempos Headline';
+  src: local('Tiempos Headline'), url('./tiempos/tiempos-headline-test-medium-italic.woff') format('woff');
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato'), url('./lato/Lato-Regular.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato Black';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: local('Lato Black'), url('./lato/Lato-Black.woff2') format('woff2');
+}
