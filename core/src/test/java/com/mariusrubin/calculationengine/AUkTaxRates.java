@@ -24,7 +24,7 @@ public class AUkTaxRates {
     final var fy2023Simple   = LocalDate.of(2023, 9, 30);
     final var fy2023Boundary = LocalDate.of(2023, 4, 6);
 
-    final var unconfigured = LocalDate.of(2025, 5, 20);
+    final var unconfigured = LocalDate.of(2010, 5, 20);
 
     assertThat(UkTaxRates.forDate(fy2022Simple)).isEqualTo(FY22_23);
     assertThat(UkTaxRates.forDate(fy2022Boundary)).isEqualTo(FY22_23);
