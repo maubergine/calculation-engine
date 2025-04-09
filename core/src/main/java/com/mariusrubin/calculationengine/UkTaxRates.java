@@ -314,6 +314,41 @@ public enum UkTaxRates {
               new DefaultBoundedRate(LOWER, 12, 4_189),
               new DefaultRate(HIGHER, 2),
               13.8f
+          )),
+  FY25_26(UkFinancialYear.starting(2025),
+          new PersonalAllowanceRates(
+              12_570,
+              100_000,
+              0.5f
+          ),
+          new IncomeTaxRates(
+              new DefaultBoundedRate(BASIC, 20, 37_700),
+              new DefaultBoundedRate(HIGHER, 40, 125_140),
+              new DefaultRate(ADDITIONAL, 45)
+          ),
+          new DividendRates(
+              1_000,
+              new DefaultRate(BASIC, 8.75f),
+              new DefaultRate(HIGHER, 33.75f),
+              new DefaultRate(ADDITIONAL, 39.35f)
+          ),
+          new SavingsAllowances(
+              1_000,
+              500,
+              0
+          ),
+          new PensionRates(
+              60_000,
+              10_000,
+              3_600,
+              200_000,
+              260_000,
+              0.5f),
+          new Class1NiRates(
+              1_048,
+              new DefaultBoundedRate(LOWER, 12, 4_189),
+              new DefaultRate(HIGHER, 2),
+              13.8f
           ));
 
   private final FinancialYear          financialYear;
