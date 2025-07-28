@@ -20,7 +20,7 @@
         <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-shade-plugin.version>3.6.0</maven-shade-plugin.version>
-        <native-maven-plugin.version>0.10.6</native-maven-plugin.version>
+        <native-maven-plugin.version>0.11.0</native-maven-plugin.version>
         <maven.compiler.source>${java.specification.version}</maven.compiler.source>
         <maven.compiler.target>${java.specification.version}</maven.compiler.target>
     </properties>
@@ -140,6 +140,15 @@
                                     <goal>test</goal>
                                 </goals>
                                 <phase>test</phase>
+                                <configuration>
+                                    <buildArgs>
+                                        <arg>-H:+UnlockExperimentalVMOptions</arg>
+                                        <arg>-H:ReflectionConfigurationFiles=${project.basedir}/META-INF/native-image/reflect-config.json,${project.build.directory}/classes/META-INF/native-image/picocli-generated/reflect-config.json</arg>
+                                        <arg>-R:MaxHeapSize=2g</arg>
+                                        <arg>-march=native</arg>
+                                        <arg>--initialize-at-build-time=org.junit.platform.engine.support.discovery.EngineDiscoveryRequestResolver</arg>
+                                    </buildArgs>
+                                </configuration>
                             </execution>
                         </executions>
                         <configuration>
