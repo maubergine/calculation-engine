@@ -292,7 +292,7 @@ public enum UkTaxRates {
               new DefaultRate(ADDITIONAL, 45)
           ),
           new DividendRates(
-              1_000,
+              500,
               new DefaultRate(BASIC, 8.75f),
               new DefaultRate(HIGHER, 33.75f),
               new DefaultRate(ADDITIONAL, 39.35f)

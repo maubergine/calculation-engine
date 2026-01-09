@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import org.junit.jupiter.api.Test;
 import picocli.CommandLine;
+import picocli.CommandLine.Help.Ansi;
+import picocli.CommandLine.Help.ColorScheme;
 
 /**
  * @author Marius Rubin
@@ -15,11 +17,13 @@ public class ACalculatorRunner {
 
   @Test
   public void shouldPrintHelpText() {
-    final var command = new CommandLine(new CalculatorRunner());
-    final var writer  = new StringWriter();
+    final var command     = new CommandLine(new CalculatorRunner());
+    final var colorScheme = new ColorScheme.Builder().ansi(Ansi.OFF).build();
+    command.setColorScheme(colorScheme);
+    final var writer = new StringWriter();
     command.setOut(new PrintWriter(writer));
 
-    int exitCode = command.execute("-h");
+    final int exitCode = command.execute("-h");
 
     final var textOutput = writer.toString();
 
