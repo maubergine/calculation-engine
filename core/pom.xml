@@ -12,14 +12,14 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <hibernate-validator.version>9.1.0.Final</hibernate-validator.version>
-        <jackson-dataformat-yaml.version>2.21.1</jackson-dataformat-yaml.version>
+        <jackson-dataformat-yaml.version>2.21.2</jackson-dataformat-yaml.version>
         <jakarta.validation-api.version>3.1.1</jakarta.validation-api.version>
         <picocli.version>4.7.7</picocli.version>
         <assertj-core.version>3.27.7</assertj-core.version>
         <junit.version>6.0.0</junit.version>
         <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
-        <maven-shade-plugin.version>3.6.1</maven-shade-plugin.version>
+        <maven-shade-plugin.version>3.6.2</maven-shade-plugin.version>
         <native-maven-plugin.version>0.11.4</native-maven-plugin.version>
         <maven.compiler.source>${java.specification.version}</maven.compiler.source>
         <maven.compiler.target>${java.specification.version}</maven.compiler.target>
