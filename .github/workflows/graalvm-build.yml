@@ -7,9 +7,9 @@ jobs:
       - uses: actions/checkout@v6
       - uses: graalvm/setup-graalvm@v1
         with:
-          java-version: '21'
+          java-version: '25'
           distribution: 'graalvm-community' # See 'Options' for all available distributions
-          version: 21.0.2
+          version: 25.0.2
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Check GraalVM installed
         run: |
