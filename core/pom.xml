@@ -57,6 +57,11 @@
             <version>${hibernate-validator.version}</version>
         </dependency>
         <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.14.2</version>
+        </dependency>
+        <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertj-core.version}</version>
@@ -142,8 +147,6 @@
                                 <phase>test</phase>
                                 <configuration>
                                     <buildArgs>
-                                        <arg>-H:+UnlockExperimentalVMOptions</arg>
-                                        <arg>-H:ReflectionConfigurationFiles=${project.basedir}/META-INF/native-image/reflect-config.json,${project.build.directory}/classes/META-INF/native-image/picocli-generated/reflect-config.json</arg>
                                         <arg>-R:MaxHeapSize=2g</arg>
                                         <arg>-march=native</arg>
                                         <arg>--initialize-at-build-time=org.junit.platform.engine.support.discovery.EngineDiscoveryRequestResolver</arg>
@@ -153,9 +156,6 @@
                         </executions>
                         <configuration>
                             <buildArgs>
-                                <arg>-H:+UnlockExperimentalVMOptions</arg>
-                                <arg>-H:ReflectionConfigurationFiles=${project.basedir}/META-INF/native-image/reflect-config.json,${project.build.directory}/classes/META-INF/native-image/picocli-generated/reflect-config.json</arg>
-                                <arg>--strict-image-heap</arg>
                                 <arg>-R:MaxHeapSize=2g</arg>
                                 <arg>-march=native</arg>
                             </buildArgs>
