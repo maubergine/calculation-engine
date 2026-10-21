@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.mariusrubin</groupId>
     <artifactId>calculation-engine-core</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>calculation-engine-core</name>
     <description>Calculation Engine Core</description>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <hibernate-validator.version>9.1.2.Final</hibernate-validator.version>
+        <hibernate-validator.version>9.1.5.Final</hibernate-validator.version>
         <jackson-dataformat-yaml.version>2.22.1</jackson-dataformat-yaml.version>
         <jakarta.validation-api.version>3.1.1</jakarta.validation-api.version>
         <picocli.version>4.7.7</picocli.version>
@@ -20,7 +20,7 @@
         <maven-surefire-plugin.version>3.5.6</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
         <maven-shade-plugin.version>3.6.2</maven-shade-plugin.version>
-        <native-maven-plugin.version>1.1.4</native-maven-plugin.version>
+        <native-maven-plugin.version>1.1.14</native-maven-plugin.version>
         <maven.compiler.source>${java.specification.version}</maven.compiler.source>
         <maven.compiler.target>${java.specification.version}</maven.compiler.target>
     </properties>
@@ -59,7 +59,7 @@
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>2.14.2</version>
+            <version>2.15.0</version>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>

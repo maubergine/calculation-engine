@@ -1,0 +1,10 @@
+#!/bin/sh
+# Lints the commit message with the same rules as CI (commitlint.yml). Turned on by `npm install` (the "prepare"
+# script sets core.hooksPath).
+msg=$(cd "$(dirname "$1")" && pwd)/$(basename "$1")
+cd "$(git rev-parse --show-toplevel)" || exit 1
+if [ ! -x node_modules/.bin/commitlint ]; then
+  echo "commit-msg: commitlint isn't installed. Run npm install." >&2
+  exit 1
+fi
+exec node_modules/.bin/commitlint --edit "$msg"

@@ -1,0 +1,59 @@
+name: Commit lint
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: commitlint-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Work out the commit range
+        id: range
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            from="$BASE_SHA"
+          elif [ -n "$BEFORE_SHA" ] && git merge-base --is-ancestor "$BEFORE_SHA" "$HEAD_SHA" 2>/dev/null; then
+            from="$BEFORE_SHA"
+          else
+            # First push of a branch, or a force-push whose "before" isn't in the new history: lint just the tip commit.
+            # Empty for a root commit, which has no parent to lint from.
+            from=$(git rev-parse --verify -q "$HEAD_SHA~1" || true)
+          fi
+          echo "from=$from" >> "$GITHUB_OUTPUT"
+          echo "to=$HEAD_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Lint commit messages
+        env:
+          FROM: ${{ steps.range.outputs.from }}
+          TO: ${{ steps.range.outputs.to }}
+        run: |
+          if [ -n "$FROM" ]; then npx commitlint --from "$FROM" --to "$TO" --verbose
+          else git log -1 --format=%B "$TO" | npx commitlint --verbose; fi
