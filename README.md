@@ -38,6 +38,5 @@ it is easier in future to build out web/service layers.
 
 Contributing
 ------------
-There is not yet a well-developed process for contributions/pull-requests, releases or (in-time)
-automated deployment of any web-hosted components. In the meantime, feel free to raise issues
-or pull-requests!
+See [CONTRIBUTING.md](CONTRIBUTING.md). Releases are made by semantic-release from Conventional Commits.
+To report a security issue, see [SECURITY.md](SECURITY.md).
